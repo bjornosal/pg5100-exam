@@ -44,6 +44,7 @@
     <orderEntry type="library" name="Maven: org.primefaces.extensions:primefaces-extensions:6.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.primefaces.extensions:resources-ckeditor:6.1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.primefaces.extensions:resources-codemirror:6.1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: javax.interceptor:javax.interceptor-api:1.2" level="project" />
@@ -86,6 +87,8 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.13.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-validation:1.5.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.5.15" level="project" />
@@ -117,6 +120,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-edge-driver:3.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-firefox-driver:2.53.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-ie-driver:2.53.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: net.java.dev.jna:jna:4.2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: net.java.dev.jna:jna-platform:4.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-opera-driver:3.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-safari-driver:2.53.1" level="project" />
@@ -140,23 +144,5 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-chrome-driver:3.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-remote-driver:3.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-support:3.9.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.testcontainers:testcontainers:1.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.kohlschutter.junixsocket:junixsocket-common:2.0.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.kohlschutter.junixsocket:junixsocket-native-common:2.0.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.scijava:native-lib-loader:2.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-compress:1.12" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: commons-lang:commons-lang:2.6" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: commons-io:commons-io:2.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.rnorth:tcp-unix-socket-proxy:1.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.zeroturnaround:zt-exec:1.8" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.rnorth.duct-tape:duct-tape:1.0.6" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:slf4j-ext:1.7.25" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.rnorth.visible-assertions:visible-assertions:2.1.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: net.java.dev.jna:jna:4.2.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.testcontainers:selenium:1.6.0" level="project" />
   </component>
 </module>

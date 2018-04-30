@@ -21,7 +21,8 @@ public class IndexPO extends LayoutPO {
 
     @Override
     public boolean isOnPage() {
-        return getDriver().getTitle().contains("Quiz Game");
+        //TODO replace with title of Index Page
+        return getDriver().getTitle().contains("EXAM");
     }
 
     public boolean isLoggedIn() {

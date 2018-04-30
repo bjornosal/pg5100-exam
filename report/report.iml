@@ -25,7 +25,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.bjornosal.quizgame.backend:backend:0.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="backend" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:1.5.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.4.RELEASE" level="project" />
@@ -73,7 +73,7 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:3.2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.bjornosal.quizgame.frontend:frontend:0.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="frontend" />
     <orderEntry type="library" name="Maven: org.joinfaces:jsf-spring-boot-starter:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-jasper:8.5.15" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.15" level="project" />

@@ -22,7 +22,6 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.joinfaces</groupId>
             <artifactId>jsf-spring-boot-starter</artifactId>
@@ -131,32 +130,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <!-- To use Docker from tests -->
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>${version.testcontainers}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>selenium</artifactId>
-            <version>${version.testcontainers}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.seleniumhq.selenium</groupId>
-                    <artifactId>selenium-remote-driver</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>no.salbjo16.exams.frontend</groupId>
-            <artifactId>frontend</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -170,7 +143,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${version.springboot}</version>
                 <configuration>
-                    <finalName>quizgame</finalName>
+                    <finalName>salbjo16-exam</finalName>
                     <classifier>exec</classifier>
                 </configuration>
                 <executions>

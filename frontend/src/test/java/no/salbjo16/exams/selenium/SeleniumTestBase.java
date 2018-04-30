@@ -64,6 +64,24 @@ public abstract class SeleniumTestBase {
 
 
     @Test
+    public void testCreateAndLogoutUser(){
+
+        assertFalse(home.isLoggedIn());
+
+        String username = getUniqueId();
+        String password = "123456789";
+        home = createNewUser(username, password);
+
+        assertTrue(home.isLoggedIn());
+        assertTrue(home.getDriver().getPageSource().contains(username));
+
+        home.doLogout();
+
+        assertFalse(home.isLoggedIn());
+        assertFalse(home.getDriver().getPageSource().contains(username));
+    }
+
+    @Test
     public void testValuesAreEqual() {
         assertTrue("isTrue", true);
     }
