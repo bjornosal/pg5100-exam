@@ -10,27 +10,15 @@
 
     <!--TODO UPDATE AS PER EX-->
     <ui:define name="title">
-        Quiz Game
+        EXAM
     </ui:define>
 
-
     <ui:define name="content">
-        <h2>Quiz Game</h2>
+        <h2>EXAM</h2>
 
         <sec:authenticated>
 
-            <c:set value="#{userInfoController.stats}" var="stats"/>
-
-            <p class="victories">Your Victories: </p><h:outputLabel value="#{stats.victories}" class="victories"/>
-
-            <br/>
-
-            <p class="loses">Your Defeats: </p> <h:outputLabel value="#{stats.defeats}" class="loses"/>
-
-
-            <h:form prependId="false">
-                <h:commandButton value="New Match" action="#{matchController.newMatch}" class="gameBtn" id="newMatchBtnId"/>
-            </h:form>
+        <p>You are logged in!</p>
 
         </sec:authenticated>
 

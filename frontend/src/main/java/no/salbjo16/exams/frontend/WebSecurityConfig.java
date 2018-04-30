@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
 
 /**
- * Config class created by lecturer
+ * Config class created by arcuri82
  */
 @Configuration
 @EnableWebSecurity

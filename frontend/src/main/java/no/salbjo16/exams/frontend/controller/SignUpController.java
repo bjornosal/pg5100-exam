@@ -1,5 +1,6 @@
 package no.salbjo16.exams.frontend.controller;
 
+import no.salbjo16.exams.backend.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,9 +15,8 @@ import javax.inject.Named;
 @RequestScoped
 public class SignUpController {
 
-    //TODO add new userService
-//    @Inject
-//    private UserService userService;
+    @Inject
+    private UserService userService;
 
     @Inject
     private AuthenticationManager authenticationManager;
@@ -34,7 +34,7 @@ public class SignUpController {
         boolean registered = false;
         try {
 //            TODO add registration of user
-//            registered = userService.createUser(username, password);
+            registered = userService.createUser(username, password);
         } catch (Exception e){
             //nothing to do
         }
