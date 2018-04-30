@@ -29,21 +29,6 @@
         <version.jacoco>0.7.9</version.jacoco>
     </properties>
 
-
-    <profiles>
-        <profile>
-            <id>selenium</id>
-            <activation>
-                <property>
-                    <name>selenium</name>
-                </property>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
-
-
-
     <!--Management of dependencies used in all-->
     <dependencyManagement>
         <dependencies>
