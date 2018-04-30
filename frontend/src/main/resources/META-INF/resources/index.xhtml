@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<ui:composition template="/layout.xhtml">
+
+    <!--TODO UPDATE AS PER EX-->
+    <ui:define name="title">
+        Quiz Game
+    </ui:define>
+
+
+    <ui:define name="content">
+        <h2>Quiz Game</h2>
+
+        <sec:authenticated>
+
+            <c:set value="#{userInfoController.stats}" var="stats"/>
+
+            <p class="victories">Your Victories: </p><h:outputLabel value="#{stats.victories}" class="victories"/>
+
+            <br/>
+
+            <p class="loses">Your Defeats: </p> <h:outputLabel value="#{stats.defeats}" class="loses"/>
+
+
+            <h:form prependId="false">
+                <h:commandButton value="New Match" action="#{matchController.newMatch}" class="gameBtn" id="newMatchBtnId"/>
+            </h:form>
+
+        </sec:authenticated>
+
+        <sec:anonymous>
+            <p>You are not logged in!</p>
+        </sec:anonymous>
+    </ui:define>
+
+</ui:composition>
+</html>
