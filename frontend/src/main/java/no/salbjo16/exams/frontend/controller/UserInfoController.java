@@ -10,18 +10,10 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class UserInfoController {
-/*
-
-    @Inject
-    private MatchStatsService matchStatsService;
-*/
 
     public String getUserName(){
         return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
 
-//    public MatchStats getStats(){
-//        return matchStatsService.getMatchStats(getUserName());
-//    }
 }

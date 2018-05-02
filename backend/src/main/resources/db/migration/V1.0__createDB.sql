@@ -14,3 +14,5 @@ alter table book_sellers add constraint FKc4w7cyfffg6l814ud6inld4p9 foreign key 
 alter table book_sellers add constraint FKkmpxn70jr7stgmufer2lfsafp foreign key (book_id) references book;
 alter table message add constraint FKb944tffcq8o8omuojf97q7es9 foreign key (receiver_email) references users;
 alter table message add constraint FKuqfakq269q9cbhdcdevk7a90 foreign key (sender_email) references users;
+
+

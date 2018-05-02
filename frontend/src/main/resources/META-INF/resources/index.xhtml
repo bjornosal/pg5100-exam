@@ -4,7 +4,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:sec="http://www.springframework.org/security/tags"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/layout.xhtml">
 
@@ -17,8 +17,64 @@
         <h2>EXAM</h2>
 
         <sec:authenticated>
+            Welcome to Used Books Corp!
 
-        <p>You are logged in!</p>
+
+            <h3>Books</h3>
+
+            <h:form id="createForm">
+                <h:dataTable value="#{homeController.allBooks}" var="book" border="1" id="booksTable">
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        <h:outputLabel value="#{book.title}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Sell</f:facet>
+               <!--         <h:selectBooleanCheckbox
+                                value="#{menuController.checksForm[dish.id]}"
+                                id="checkBox_#{dish.id}"
+                                class="k#{dish.id}">
+                        </h:selectBooleanCheckbox>-->
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+
+               <!-- <h:dataTable value="#{homeController.allBooks}" var="book">
+                    <h:column>
+                        <f:facet name="header">Book Title</f:facet>
+                        #{book.title}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Course</f:facet>
+                        #{book.course}
+                    </h:column>
+                </h:dataTable>-->
+               <!--
+                <table class="">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Sellers</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <h:form prependId="false">
+                        <tr>
+                            <td><h:outputText value="#{book.title}"/></td>
+                            <td><h:outputText value="#{book.course}"/></td>
+                            <td><h:outputText value="#{book.sellers.size}"/></td>
+                        </tr>
+                    </h:form>
+                    </tbody>
+
+                </table>-->
+
+
+
 
         </sec:authenticated>
 
