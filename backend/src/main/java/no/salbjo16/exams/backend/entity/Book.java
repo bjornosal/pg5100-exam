@@ -5,7 +5,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -18,9 +20,8 @@ public class Book {
     @Size(min = 1, max = 1024)
     private String title;
 
-    @NotNull
+    @ElementCollection
     private List<String> authors;
-
 
     @NotBlank
     @Column(unique = true)
@@ -28,7 +29,8 @@ public class Book {
     private String course;
 
     @NotNull
-    private List<String> sellers;
+    @OneToMany
+    private List<User> sellers = new ArrayList<>();
 
 
     public Long getId() {
@@ -63,11 +65,11 @@ public class Book {
         this.course = course;
     }
 
-    public List<String> getSellers() {
+    public List<User> getSellers() {
         return sellers;
     }
 
-    public void setSellers(List<String> sellers) {
+    public void setSellers(List<User> sellers) {
         this.sellers = sellers;
     }
 }
