@@ -1,6 +1,7 @@
 package no.salbjo16.exams.frontend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,7 +20,10 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //TODO possibly remove qualifier. Using to remove error (IntelliJ's fault)
+
     @Autowired
+    @Qualifier("dataSource")
     private DataSource dataSource;
 
     @Autowired

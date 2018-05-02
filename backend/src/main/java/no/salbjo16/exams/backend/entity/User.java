@@ -12,6 +12,8 @@ import java.util.List;
 @Table(name="USERS")
 public class User {
 
+    //TODO consider reworking User?
+
     //Assuming user will use email as identifier instead of username as in previous example
     @Id
     @NotNull
@@ -40,6 +42,22 @@ public class User {
 
     //Needs an empty constructor
     public User() {
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public List<Message> getReceiverMessages() {
+        return receiverMessages;
+    }
+
+    public void setReceiverMessages(List<Message> receiverMessages) {
+        this.receiverMessages = receiverMessages;
     }
 
     public String getName() {

@@ -20,12 +20,12 @@ public class ResetService {
 
 
     public void resetDatabase() {
-//        Query query = em.createNativeQuery("DELETE FROM user_roles");
-//        query.executeUpdate();
+        Query query = em.createNativeQuery("DELETE FROM book_authors");
+        query.executeUpdate();
 
         deleteEntities(Message.class);
-        deleteEntities(User.class);
         deleteEntities(Book.class);
+        deleteEntities(User.class);
     }
 
     private void deleteEntities(Class<?> entity){
@@ -35,7 +35,7 @@ public class ResetService {
 
         String entityName = entity.getName();
 
-        Query query = em.createQuery("delete from "+ entityName);
+        Query query = em.createQuery("DELETE FROM "+ entityName);
         query.executeUpdate();
     }
 }

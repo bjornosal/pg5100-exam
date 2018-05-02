@@ -20,7 +20,7 @@ public class Book {
     @Size(min = 1, max = 1024)
     private String title;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> authors;
 
     @NotBlank

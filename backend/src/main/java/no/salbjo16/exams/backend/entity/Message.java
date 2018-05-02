@@ -12,6 +12,8 @@ public class Message {
     @GeneratedValue @Id
     private Long id;
 
+    @NotBlank
+    @Size(min = 1, max = 4096)
     private String text;
 
     @NotNull

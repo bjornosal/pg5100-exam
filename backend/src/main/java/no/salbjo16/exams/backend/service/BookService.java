@@ -30,28 +30,29 @@ public class BookService {
     /*
     Assuming I will have access to a book when deleting. (Admin?)
      */
-    public void deleteBook(@NotNull Book book) {
-        em.remove(em.find(Book.class, book));
+    public void deleteBook(@NotNull Long bookId) {
+        em.remove(em.find(Book.class, bookId));
     }
 
-    public boolean addUserAsSeller(User user, Book book) {
+    public boolean addUserAsSeller(String userMail, Long bookId) {
         //Assuming sellers can not have more than one copy of a book
-        //TODO this might not work, as it does not use the EM?
-        Book bookToAddTo = em.find(Book.class, book);
-        if (bookToAddTo.getSellers().contains(user)) {
+        Book book = em.find(Book.class, bookId);
+        User user = em.find(User.class, userMail);
+        if (book.getSellers().contains(user)) {
             return false;
         } else {
-            bookToAddTo.getSellers().add(user);
+            book.getSellers().add(user);
             return true;
         }
     }
 
     //TODO maybe implement id instead of book?
     //TODO does EM have to be used to remove
-    public boolean removeUserAsSeller(User user, Book book) {
-        Book bookToRemoveFrom = em.find(Book.class, book);
-        if(bookToRemoveFrom.getSellers().contains(user)) {
-            bookToRemoveFrom.getSellers().remove(user);
+    public boolean removeUserAsSeller(String userEmail, Long bookId) {
+        Book book = em.find(Book.class, bookId);
+        User user = em.find(User.class, userEmail);
+        if(book.getSellers().contains(user)) {
+            book.getSellers().remove(user);
             return true;
         }
         return false;
@@ -63,7 +64,7 @@ public class BookService {
     }
 
     public List<Book> getAllBooksWithSellers() {
-        TypedQuery<Book> query = em.createQuery("SELECT b from Book b WHERE b.sellers.size > 1", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b from Book b WHERE b.sellers.size >= 1", Book.class);
         return query.getResultList();
     }
 
