@@ -6,6 +6,7 @@ import no.salbjo16.exams.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.util.HashMap;
 import java.util.List;
@@ -23,18 +24,19 @@ public class HomeController {
 
     private Map<Long, Boolean> checksForm = new HashMap<>();
 
-
-
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    public boolean markAsSelling(Book book) {
-        String email = userInfoController.getUserName();
-        return bookService.addUserAsSeller(email, book.getId());
+    public List<Book> getAllBooksWithSellers() {
+        return bookService.getAllBooksWithSellers();
     }
 
-
+    public boolean markAsSelling(Book book) {
+        String email = userInfoController.getUserName();
+        checksForm.put(book.getId(), true);
+        return bookService.addUserAsSeller(email, book.getId());
+    }
 
     public Map<Long, Boolean> getChecksForm() {
         return checksForm;

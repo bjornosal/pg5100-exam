@@ -29,7 +29,7 @@ public class Book {
     private String course;
 
     @NotNull
-    @OneToMany
+    @ManyToMany
     private List<User> sellers = new ArrayList<>();
 
 
