@@ -23,7 +23,7 @@
         <h3>Books</h3>
 
 
-        <h:form id="createForm">
+        <h:form id="createForm" prependId="false">
             <h:dataTable value="#{homeController.allBooks}" var="book" border="1" id="booksTable">
                 <h:column>
                     <f:facet name="header">Title</f:facet>
@@ -32,32 +32,38 @@
 
                 <h:column>
                     <f:facet name="header">Author(s)</f:facet>
-                    <h:outputLabel value="#{book.authors}" class="bookTitle"/>
+                    <h:outputLabel value="#{book.authors}" class="bookAuthors"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Course</f:facet>
-                    <h:outputLabel value="#{book.course}" class="bookTitle"/>
+                    <h:outputLabel value="#{book.course}" class="bookCourse"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Sellers</f:facet>
-                    <h:outputLabel value="#{book.sellers.size()}" class="bookTitle"/>
+                    <h:outputLabel value="#{book.sellers.size()}" class="bookSellers"/>
                 </h:column>
 
                 <sec:authenticated>
                     <h:column>
                         <f:facet name="header">Sell</f:facet>
-
                         <h:selectBooleanCheckbox
                                 value="#{homeController.checksForm[book.id]}"
                                 id="checkBox_#{book.id}"
                                 class="k#{book.id}"
                                 disabled="true"/>
+                        <h:commandButton value="(Un)Mark Sell" action="#{homeController.markBook(book)}"/>
+                    </h:column>
 
-                        <h:commandButton value="Put for sale" action="#{homeController.markBook(book)}"/>
+                    <h:column>
+                        <f:facet name="header">Details</f:facet>
+                        <h:form prependId="false">
+                            <h:commandButton value="New Match" action="#{homeController.toDetailPage(book)}"/>
+                        </h:form>
                     </h:column>
                 </sec:authenticated>
+
             </h:dataTable>
         </h:form>
 

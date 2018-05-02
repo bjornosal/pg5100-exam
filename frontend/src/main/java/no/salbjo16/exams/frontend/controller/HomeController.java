@@ -2,11 +2,9 @@ package no.salbjo16.exams.frontend.controller;
 
 import no.salbjo16.exams.backend.entity.Book;
 import no.salbjo16.exams.backend.service.BookService;
-import no.salbjo16.exams.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class HomeController implements Serializable{
 
     @Autowired
@@ -23,16 +21,15 @@ public class HomeController implements Serializable{
     @Autowired
     private UserInfoController userInfoController;
 
+
+    private Book book;
+
+    //TODO this is at fault?
+    //TODO create service method which creates a hashmap with books that current user is selling?
     private Map<Long, Boolean> checksForm = new HashMap<>();
-
-
 
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
-    }
-
-    public List<Book> getAllBooksWithSellers() {
-        return bookService.getAllBooksWithSellers();
     }
 
     public boolean markBook(Book book) {
@@ -62,6 +59,11 @@ public class HomeController implements Serializable{
         System.out.println(book.getId());
         return bookService.removeUserAsSeller(email, book.getId());
 
+    }
+
+    public String toDetailPage(Book book) {
+        this.book = book;
+        return "/ui/book-detail.jsf&faces-redirect=false";
     }
 
     public Map<Long, Boolean> getChecksForm() {

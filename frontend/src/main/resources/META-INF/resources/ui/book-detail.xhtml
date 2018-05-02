@@ -17,17 +17,17 @@
         <h2>Used Books</h2>
 
         <sec:authenticated>
-            <h:outputText value="Welcome to Used Books Corp <b>#{userInfoController.fullName}</b>!"/>
+            <h:outputText value="Welcome to Used Books Corp #{userInfoController.fullName}!"/>
         </sec:authenticated>
 
         <h3>Books</h3>
-        <!--  <c:choose>
-                   <c:when test="#{homeController.allBooksWithSellers.size()} > 0">-->
-        <!--            </c:when>
+          <c:choose>
+                   <c:when test="#{bookController.allBooksWithSellers.size()} > 0">
+                    </c:when>
                     <c:otherwise>
                         <h4>Currently no books for sale.</h4>
                     </c:otherwise>
-                </c:choose>-->
+                </c:choose>
         <sec:anonymous>
             <p>You are not logged in!</p>
         </sec:anonymous>

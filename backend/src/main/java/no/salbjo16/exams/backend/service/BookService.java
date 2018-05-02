@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -46,8 +47,6 @@ public class BookService {
         }
     }
 
-    //TODO maybe implement id instead of book?
-    //TODO does EM have to be used to remove
     public boolean removeUserAsSeller(String userEmail, Long bookId) {
         Book book = em.find(Book.class, bookId);
         User user = em.find(User.class, userEmail);
@@ -68,6 +67,22 @@ public class BookService {
         return query.getResultList();
     }
 
+    //TODO remove this
+/*
+    public HashMap<Long, Boolean> getAllBooksThatUserIsSelling(String email) {
+
+        HashMap<Long, Boolean> booksForSale = new HashMap<>();
+
+        List<Book> books = getAllBooks();
+        for(Book book : books) {
+            for(User user : book.getSellers()) {
+                if(user.getEmail().equals(email)) {
+                    booksForSale.put(book.getId(), true);
+                }
+            }
+        }
+        return booksForSale;
+    }*/
 
 
 }
