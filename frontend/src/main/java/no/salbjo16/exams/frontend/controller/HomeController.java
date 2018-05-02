@@ -32,10 +32,31 @@ public class HomeController {
         return bookService.getAllBooksWithSellers();
     }
 
-    public boolean markAsSelling(Book book) {
+    public void markAsSelling(Book book) {
         String email = userInfoController.getUserName();
-        checksForm.put(book.getId(), true);
-        return bookService.addUserAsSeller(email, book.getId());
+        if(checksForm.get(book.getId()) != null) {
+
+            if(checksForm.get(book.getId()))  {
+                checksForm.put(book.getId(), false);
+                bookService.removeUserAsSeller(email, book.getId());
+            } else {
+                checksForm.put(book.getId(), true);
+                bookService.addUserAsSeller(email, book.getId());
+
+            }
+        } else {
+            checksForm.put(book.getId(), true);
+            bookService.addUserAsSeller(email, book.getId());
+        }
+        System.out.println(book.getId());
+    }
+
+    public boolean markAsNotSelling(Book book) {
+        String email = userInfoController.getUserName();
+        checksForm.put(book.getId(), false);
+        System.out.println(book.getId());
+        return bookService.removeUserAsSeller(email, book.getId());
+
     }
 
     public Map<Long, Boolean> getChecksForm() {

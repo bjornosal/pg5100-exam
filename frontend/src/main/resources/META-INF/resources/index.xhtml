@@ -48,9 +48,20 @@
                 <sec:authenticated>
                     <h:column>
                         <f:facet name="header">Sell</f:facet>
-                        <h:selectBooleanCheckbox value="#{homeController.checksForm[book.id]}"
-                                                 onchange="#{homeController.markAsSelling(book)}"/>
+                        <h:selectBooleanCheckbox
+                                value="#{homeController.checksForm[book.id]}"
+                                id="checkBox_#{book.id}"
+                                class="k#{book.id}"
+                                disabled="true"/>
+                        <c:choose>
+                            <c:when test="#{homeController.checksForm[book.id]} = true">
+                                <h:commandButton value="Take off sale" action="#{homeController.markAsSelling(book)}"/>
+                            </c:when>
 
+                            <c:otherwise>
+                                <h:commandButton value="Put for sale" action="#{homeController.markAsSelling(book)}"/>
+                            </c:otherwise>
+                        </c:choose>
                     </h:column>
                 </sec:authenticated>
             </h:dataTable>
