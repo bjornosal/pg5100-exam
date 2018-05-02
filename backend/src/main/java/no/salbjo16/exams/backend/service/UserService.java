@@ -20,17 +20,18 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    public boolean createUser(String username, String password){
+    public boolean createUser(String name, String surname, String password, String email){
         String hashedPassword = passwordEncoder.encode(password);
 
-        if(em.find(User.class, username) != null) {
+        if(em.find(User.class, email) != null) {
             return false;
         }
 
         User user = new User();
-        user.setUsername(username);
+        user.setName(name);
+        user.setSurname(surname);
         user.setPassword(hashedPassword);
-        user.setRoles(Collections.singleton("USER"));
+        user.setEmail(email);
         user.setEnabled(true);
 
         em.persist(user);

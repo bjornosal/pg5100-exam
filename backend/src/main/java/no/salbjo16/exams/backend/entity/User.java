@@ -1,25 +1,31 @@
 package no.salbjo16.exams.backend.entity;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 //Naming table as 'User' is not appreciated as table name
 @Entity
 @Table(name="USERS")
 public class User {
 
+    //Assuming user will use email as identifier instead of username as in previous example
     @Id
+    @NotNull
+    @Email
+    @Column(unique = true)
+    private String email;
+
     @NotBlank
-    private String username;
+    private String name;
+
+    @NotBlank
+    private String surname;
 
     @NotBlank
     private String password;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles;
 
     @NotNull
     private Boolean enabled;
@@ -28,12 +34,20 @@ public class User {
     public User() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPassword() {
@@ -44,14 +58,6 @@ public class User {
         this.password = password;
     }
 
-    public Set<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
-
     public Boolean getEnabled() {
         return enabled;
     }
@@ -59,4 +65,13 @@ public class User {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
