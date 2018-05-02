@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 //Naming table as 'User' is not appreciated as table name
 @Entity
@@ -29,6 +30,13 @@ public class User {
 
     @NotNull
     private Boolean enabled;
+
+    @OneToMany(mappedBy = "sender", cascade =   CascadeType.ALL)
+    private List<Message> sentMessages;
+
+    @OneToMany(mappedBy = "receiver", cascade =   CascadeType.ALL)
+    private List<Message> receiverMessages;
+
 
     //Needs an empty constructor
     public User() {
