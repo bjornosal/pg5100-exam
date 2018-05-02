@@ -26,8 +26,8 @@ public class MessageServiceTest extends ServiceTestBase {
         final String TEST_USER_ONE_EMAIL = "TEST_ONE@TEST.COM";
         final String TEST_USER_TWO_EMAIL = "TEST_TWO@TEST.COM";
 
-        userService.createUser("TEST_ONE", "TEST_ONE_SURNAME", "TEST_PASSWORD", TEST_USER_ONE_EMAIL);
-        userService.createUser("TEST_TWO", "TEST_TWO_SURNAME", "TEST_PASSWORD", TEST_USER_TWO_EMAIL);
+//        userService.createUser("TEST_ONE", "TEST_ONE_SURNAME", "TEST_PASSWORD", TEST_USER_ONE_EMAIL);
+//        userService.createUser("TEST_TWO", "TEST_TWO_SURNAME", "TEST_PASSWORD", TEST_USER_TWO_EMAIL);
 
         assertNotNull(messageService.sendMessage("TEST_MESSAGE", TEST_USER_ONE_EMAIL, TEST_USER_TWO_EMAIL));
     }

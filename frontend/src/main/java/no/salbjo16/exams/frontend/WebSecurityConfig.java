@@ -20,8 +20,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //TODO possibly remove qualifier. Using to remove error (IntelliJ's fault)
-
     @Autowired
     @Qualifier("dataSource")
     private DataSource dataSource;
@@ -70,12 +68,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                     "FROM users " +
                                     "WHERE username = ?"
                     )
-                    //TODO IMplement this part if their role is something??
-                  /*  .authoritiesByUsernameQuery(
+                    .authoritiesByUsernameQuery(
                             "SELECT x.username, y.roles " +
                                     "FROM users x, user_roles y " +
                                     "WHERE x.username = ? and y.user_username = x.username "
-                    )*/
+                    )
                     /*
                         Note: in BCrypt, the "password" field also contains the salt
                      */
