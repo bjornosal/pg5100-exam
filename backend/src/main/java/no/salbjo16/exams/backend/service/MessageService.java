@@ -16,11 +16,12 @@ public class MessageService {
     @Autowired
     private EntityManager em;
 
-    public Long sendMessage(String text, User sender, User receiver) {
+    public Long sendMessage(String text, String senderEmail, String receiverEmail) {
         //Sender will always exist as it is the logged in user.
-        User recipient  = em.find(User.class, receiver);
+        User sender = em.find(User.class, senderEmail);
+        User recipient  = em.find(User.class, receiverEmail);
         if(recipient == null) {
-            throw new IllegalArgumentException("User with email " + receiver.getEmail() + " does not exist.");
+            throw new IllegalArgumentException("User with email " + receiverEmail + " does not exist.");
         }
         Message message = new Message();
         message.setText(text);
