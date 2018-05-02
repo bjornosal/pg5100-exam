@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.Collections;
 
@@ -38,5 +39,12 @@ public class UserService {
         em.persist(user);
 
         return true;
+    }
+
+    public String getFullNameByEmail(String email) {
+        String name = em.find(User.class, email).getName();
+        String surname = em.find(User.class, email).getSurname();
+
+        return name + " " + surname;
     }
 }

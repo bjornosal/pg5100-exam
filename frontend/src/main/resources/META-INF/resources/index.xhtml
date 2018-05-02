@@ -14,69 +14,48 @@
     </ui:define>
 
     <ui:define name="content">
-        <h2>EXAM</h2>
+        <h2>Used Books</h2>
 
         <sec:authenticated>
-            Welcome to Used Books Corp!
+            <h:outputText value="Welcome to Used Books Corp <b>#{userInfoController.fullName}</b>!"/>
+        </sec:authenticated>
 
+        <h3>Books</h3>
 
-            <h3>Books</h3>
+        <h:form id="createForm">
+            <h:dataTable value="#{homeController.allBooks}" var="book" border="1" id="booksTable">
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputLabel value="#{book.title}" class="bookTitle"/>
+                </h:column>
 
-            <h:form id="createForm">
-                <h:dataTable value="#{homeController.allBooks}" var="book" border="1" id="booksTable">
-                    <h:column>
-                        <f:facet name="header">Title</f:facet>
-                        <h:outputLabel value="#{book.title}" class="bookTitle"/>
-                    </h:column>
+                <h:column>
+                    <f:facet name="header">Author(s)</f:facet>
+                    <h:outputLabel value="#{book.authors}" class="bookTitle"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Course</f:facet>
+                    <h:outputLabel value="#{book.course}" class="bookTitle"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Sellers</f:facet>
+                    <h:outputLabel value="#{book.sellers.size()}" class="bookTitle"/>
+                </h:column>
+
+                <sec:authenticated>
                     <h:column>
                         <f:facet name="header">Sell</f:facet>
-               <!--         <h:selectBooleanCheckbox
-                                value="#{menuController.checksForm[dish.id]}"
-                                id="checkBox_#{dish.id}"
-                                class="k#{dish.id}">
-                        </h:selectBooleanCheckbox>-->
+                        <h:selectBooleanCheckbox
+                                value="#{homeController.checksForm[book.id]}"
+                                id="checkBox_#{book.id}"
+                                class="book#{book.id}">
+                        </h:selectBooleanCheckbox>
                     </h:column>
-                </h:dataTable>
-            </h:form>
-
-
-               <!-- <h:dataTable value="#{homeController.allBooks}" var="book">
-                    <h:column>
-                        <f:facet name="header">Book Title</f:facet>
-                        #{book.title}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Course</f:facet>
-                        #{book.course}
-                    </h:column>
-                </h:dataTable>-->
-               <!--
-                <table class="">
-                    <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Sellers</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <h:form prependId="false">
-                        <tr>
-                            <td><h:outputText value="#{book.title}"/></td>
-                            <td><h:outputText value="#{book.course}"/></td>
-                            <td><h:outputText value="#{book.sellers.size}"/></td>
-                        </tr>
-                    </h:form>
-                    </tbody>
-
-                </table>-->
-
-
-
-
-        </sec:authenticated>
+                </sec:authenticated>
+            </h:dataTable>
+        </h:form>
 
         <sec:anonymous>
             <p>You are not logged in!</p>
