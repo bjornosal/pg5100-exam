@@ -1,22 +1,18 @@
 package no.salbjo16.exams.backend.service;
 
 import no.salbjo16.exams.backend.StubApplication;
-import no.salbjo16.exams.backend.entity.Book;
-import no.salbjo16.exams.backend.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StubApplication.class,
@@ -38,7 +34,7 @@ public class BookServiceTest extends ServiceTestBase {
 
     private String createUser() {
         String userEmail = "TEST_EMAIL@EMAIL.COM";
-//        userService.createUser("TEST_NAME", "TEST_SURNAME", "TEST_PASSWORD", userEmail);
+        userService.createUser("TEST_NAME", "TEST_SURNAME", "TEST_PASSWORD", userEmail);
         return (userEmail);
     }
 

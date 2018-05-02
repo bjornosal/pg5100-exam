@@ -25,16 +25,17 @@ public class SignUpController {
     private UserDetailsService userDetailsService;
 
 
-    private String username;
-
+    private String email;
     private String password;
+    private String name;
+    private String surname;
 
     public String signUpUser(){
 
         boolean registered = false;
         try {
 //            TODO add registration of user
-            registered = userService.createUser(username, password);
+            registered = userService.createUser(email, password, name ,surname);
         } catch (Exception e){
             //nothing to do
         }
@@ -42,7 +43,7 @@ public class SignUpController {
 
         if(registered){
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     userDetails,
                     password,
@@ -60,12 +61,12 @@ public class SignUpController {
         }
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
