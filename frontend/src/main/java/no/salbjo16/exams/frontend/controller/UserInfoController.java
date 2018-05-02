@@ -20,6 +20,7 @@ public class UserInfoController {
         return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
+
 //    public MatchStats getStats(){
 //        return matchStatsService.getMatchStats(getUserName());
 //    }
