@@ -66,11 +66,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                     "FROM users " +
                                     "WHERE username = ?"
                     )
-                    .authoritiesByUsernameQuery(
+                    //TODO IMplement this part if their role is something??
+                  /*  .authoritiesByUsernameQuery(
                             "SELECT x.username, y.roles " +
                                     "FROM users x, user_roles y " +
                                     "WHERE x.username = ? and y.user_username = x.username "
-                    )
+                    )*/
                     /*
                         Note: in BCrypt, the "password" field also contains the salt
                      */
