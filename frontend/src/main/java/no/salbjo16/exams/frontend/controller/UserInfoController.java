@@ -20,10 +20,12 @@ public class UserInfoController {
         return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
-    public String getFullName() {
+    public String getFullNameOfCurrentUser() {
         return userService.getFullNameByEmail(getUserName());
     }
 
-
+    public String getFullNameByEmail(String email) {
+        return userService.getFullNameByEmail(email);
+    }
 
 }

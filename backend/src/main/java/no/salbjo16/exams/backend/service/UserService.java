@@ -44,7 +44,6 @@ public class UserService {
     public String getFullNameByEmail(String email) {
         String name = em.find(User.class, email).getName();
         String surname = em.find(User.class, email).getSurname();
-
         return name + " " + surname;
     }
 }

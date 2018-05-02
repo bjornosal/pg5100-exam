@@ -16,10 +16,12 @@ public class BookController {
     private BookService bookService;
 
 
-    public List<Book> getAllBooksWithSellers() {
-        System.out.println("#######################"+bookService.getAllBooksWithSellers().size());
-        return bookService.getAllBooksWithSellers();
+
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
     }
+
+
 
 
 
