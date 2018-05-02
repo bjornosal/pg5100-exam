@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Named
-@RequestScoped
-public class HomeController {
+@SessionScoped
+public class HomeController implements Serializable{
 
     @Autowired
     private BookService bookService;
@@ -24,6 +25,8 @@ public class HomeController {
 
     private Map<Long, Boolean> checksForm = new HashMap<>();
 
+
+
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -32,26 +35,28 @@ public class HomeController {
         return bookService.getAllBooksWithSellers();
     }
 
-    public void markAsSelling(Book book) {
-        String email = userInfoController.getUserName();
+    public boolean markBook(Book book) {
         if(checksForm.get(book.getId()) != null) {
 
-            if(checksForm.get(book.getId()))  {
-                checksForm.put(book.getId(), false);
-                bookService.removeUserAsSeller(email, book.getId());
+            if(checksForm.get(book.getId())) {
+                return markAsNotSelling(book);
             } else {
-                checksForm.put(book.getId(), true);
-                bookService.addUserAsSeller(email, book.getId());
-
+                return markAsSelling(book);
             }
-        } else {
-            checksForm.put(book.getId(), true);
-            bookService.addUserAsSeller(email, book.getId());
         }
-        System.out.println(book.getId());
+        return markAsSelling(book);
     }
 
-    public boolean markAsNotSelling(Book book) {
+
+    private boolean markAsSelling(Book book) {
+        String email = userInfoController.getUserName();
+        checksForm.put(book.getId(), true);
+        System.out.println(book.getId());
+        return bookService.addUserAsSeller(email, book.getId());
+
+    }
+
+    private boolean markAsNotSelling(Book book) {
         String email = userInfoController.getUserName();
         checksForm.put(book.getId(), false);
         System.out.println(book.getId());

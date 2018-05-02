@@ -19,8 +19,10 @@ public class User {
     @Email
     private String email;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String surname;
 
     @NotBlank
@@ -42,7 +44,7 @@ public class User {
     public User() {
     }
 
-    public String getUsername() {
+    public String getEmail() {
         return email;
     }
 
