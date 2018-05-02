@@ -20,8 +20,8 @@ public class ResetService {
 
 
     public void resetDatabase() {
-        Query query = em.createNativeQuery("DELETE FROM user_roles");
-        query.executeUpdate();
+//        Query query = em.createNativeQuery("DELETE FROM user_roles");
+//        query.executeUpdate();
 
         deleteEntities(Message.class);
         deleteEntities(User.class);
