@@ -25,16 +25,19 @@ public class SignUpController {
     private UserDetailsService userDetailsService;
 
 
-    private String username;
-
+    private String name;
+    private String surname;
     private String password;
+    private String email;
+
 
     public String signUpUser(){
 
         boolean registered = false;
         try {
 //            TODO add registration of user
-            registered = userService.createUser(username, password);
+            //Using email as username as it is unique
+            registered = userService.createUser(name, surname, password, email);
         } catch (Exception e){
             //nothing to do
         }
@@ -42,7 +45,7 @@ public class SignUpController {
 
         if(registered){
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     userDetails,
                     password,
@@ -60,12 +63,52 @@ public class SignUpController {
         }
     }
 
-    public String getUsername() {
-        return username;
+    public UserService getUserService() {
+        return userService;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public AuthenticationManager getAuthenticationManager() {
+        return authenticationManager;
+    }
+
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
