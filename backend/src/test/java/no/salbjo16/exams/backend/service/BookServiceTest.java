@@ -87,10 +87,22 @@ public class BookServiceTest extends ServiceTestBase {
 
     }
 
-
- /*   @Test
+    @Test
     public void testGetAllBooks() {
-        TypedQuery
+        assertEquals(0, bookService.getAllBooks().size());
+        createBook();
+        assertEquals(1, bookService.getAllBooks().size());
+
     }
-*/
+
+
+    @Test
+    public void testGetAllBooksWithSellers(){
+        Long bookId = createBook();
+        String userEmail = createUser();
+
+        assertEquals(0, bookService.getAllBooksWithSellers().size());
+        assertTrue(bookService.addUserAsSeller(userEmail, bookId));
+        assertEquals(1, bookService.getAllBooks().size());
+    }
 }

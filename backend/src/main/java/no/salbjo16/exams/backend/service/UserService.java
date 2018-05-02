@@ -41,16 +41,4 @@ public class UserService {
         return true;
     }
 
-    //TODO is this required?
-    public String getUser(String email) {
-        TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE u.email =?1", User.class);
-        query.setParameter(1, email);
-
-        List<User> userResults = query.getResultList();
-        if(!userResults.isEmpty()) {
-            return userResults.get(0).getEmail();
-        }
-
-        return null;
-    }
 }
