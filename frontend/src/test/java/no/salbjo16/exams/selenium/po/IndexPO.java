@@ -4,6 +4,8 @@ import no.salbjo16.exams.selenium.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static junit.framework.TestCase.assertTrue;
+
 
 public class IndexPO extends LayoutPO {
 
@@ -21,7 +23,6 @@ public class IndexPO extends LayoutPO {
 
     @Override
     public boolean isOnPage() {
-        //TODO replace with title of Index Page
         return getDriver().getTitle().contains("USED BOOKS");
     }
 
@@ -49,12 +50,18 @@ public class IndexPO extends LayoutPO {
 
     }
 
-
     public void clickToSellBook(String row) {
         clickAndWait(row+"sellBtn");
     }
 
+    public BookDetailPO goToDetailOfBook(String row) {
+        clickAndWait(row+"detailBtn");
 
+        BookDetailPO po = new BookDetailPO(this);
+
+        assertTrue(po.isOnPage());
+        return po;
+    }
 
     //TODO how to add a new "match", anything and wait for click
    /* public MatchPO startNewMatch(){

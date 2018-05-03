@@ -1,7 +1,9 @@
 package no.salbjo16.exams.selenium;
 
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import no.salbjo16.exams.backend.entity.Book;
 import no.salbjo16.exams.backend.service.BookService;
+import no.salbjo16.exams.selenium.po.BookDetailPO;
 import no.salbjo16.exams.selenium.po.IndexPO;
 import no.salbjo16.exams.selenium.po.SignUpPO;
 import org.junit.Before;
@@ -26,14 +28,16 @@ public abstract class SeleniumTestBase {
     @Autowired
     private BookService bookService;
 
+    private BookDetailPO detail;
+    private IndexPO home;
+
+    private final String BOOKS_TABLE = "booksTable:";
+    private final String ROW_TO_TEST = BOOKS_TABLE + "0:";
+
+
     private String getUniqueId() {
         return "foo_SeleniumLocalIT_" + counter.getAndIncrement() + "@test.com";
     }
-
-
-    private IndexPO home;
-    private final String BOOKS_TABLE = "booksTable:";
-
 
     private IndexPO createNewUser(String email, String password, String name, String surname){
 
@@ -94,7 +98,6 @@ public abstract class SeleniumTestBase {
 
     @Test
     public void testRegisterSelling() {
-        final String ROW_TO_TEST = BOOKS_TABLE + "0:";
         final long ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW = home.getSellersForBookOnRow(ROW_TO_TEST);
 
         assertFalse(home.isLoggedIn());
@@ -122,6 +125,7 @@ public abstract class SeleniumTestBase {
         assertTrue(home.isForSaleMarkerDisplayed(ROW_TO_TEST));
         assertTrue(home.isSellButtonDisplayed(ROW_TO_TEST));
 
+        //checking other books
         for(int i = 1; i < bookService.getAllBooks().size(); i++) {
             assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW, home.getSellersForBookOnRow(ROW_TO_TEST));
         }
@@ -148,6 +152,45 @@ public abstract class SeleniumTestBase {
         home.doLogout();
         assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW+1, home.getSellersForBookOnRow(ROW_TO_TEST));
     }
+
+    @Test
+    public void testBookDetails() {
+        String emailOne = getUniqueId();
+        String passwordOne = "password";
+        String nameOne = "nameOne";
+        String surnameOne = "surnameOne";
+
+        String emailTwo= getUniqueId();
+        String passwordTwo = "passwordTwo";
+        String nameTwo = "nameTwo";
+        String surnameTwo = "surnameTwo";
+
+        assertFalse(home.isLoggedIn());
+        home = createNewUser(emailOne, passwordOne, nameOne, surnameOne);
+        assertTrue(home.isLoggedIn());
+
+        home.clickToSellBook(ROW_TO_TEST);
+        detail = home.goToDetailOfBook(ROW_TO_TEST);
+
+        assertEquals(emailOne, detail.getFirstSeller());
+        home.doLogout();
+
+        assertFalse(home.isLoggedIn());
+        createNewUser(emailTwo, passwordTwo, nameTwo, surnameTwo);
+
+        assertTrue(home.isLoggedIn());
+        home.goToDetailOfBook(ROW_TO_TEST);
+
+        assertEquals(emailOne, detail.getFirstSeller());
+        home.doLogout();
+        assertFalse(home.isLoggedIn());
+    }
+
+
+
+
+
+
 
 
 

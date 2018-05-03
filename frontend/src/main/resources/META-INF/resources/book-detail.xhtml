@@ -48,29 +48,36 @@
 
             <!--TODO possible new query to get sellers without current seller-->
             <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable"
-                         rendered="#{homeController.book.sellers.size() ne 0 and !detailController.sellerOnlyCurrentUser}">
+                         rendered="#{homeController.book.sellers.size() ne 0}">
 
                 <h:column>
                     <f:facet name="header">Seller</f:facet>
-                    <h:outputLabel rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
-                                   value="#{userInfoController.getFullNameByEmail(seller.email)}"
+                    <h:outputLabel value="#{userInfoController.getFullNameByEmail(seller.email)}"
+                                   id="sellerName"
                                    class="sellerName"/>
                 </h:column>
-                <sec:authenticated>
+                <h:column>
+                    <f:facet name="header">Contact</f:facet>
+                    <h:outputLabel value="#{seller.email}"
+                                   id="sellerEmail"
+                                   class="sellerEmail"/>
+                </h:column>
 
+                <sec:authenticated>
                     <h:column>
                         <f:facet name="header">Message</f:facet>
                         <h:inputTextarea rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
                                          value="#{messageController.messageForm[seller.email]}"
                                          id="checkBox_#{seller.email}"
                                          class="messageTo_#{seller.email}" />
+                        <h:outputLabel rendered="#{detailController.sellerIsCurrentUser(seller.email)}" value="You are the seller."/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Send Message</f:facet>
-                        <h:commandButton rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
-                                         value="Send Message!"
+                        <h:commandButton value="Send Message!"
                                          id="sendBtnId"
+                                         disabled="#{detailController.sellerIsCurrentUser(seller.email)}"
                                          action="#{messageController.sendMessage(seller.email)}"/>
                     </h:column>
                 </sec:authenticated>
