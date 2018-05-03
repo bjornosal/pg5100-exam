@@ -36,11 +36,11 @@
                 <h:outputLabel value="#{homeController.book.course}" />
 
 
-                <h:outputLabel value="Message can not be empty."
-                               rendered="${!empty param['error']}"/>
+                <h3><h:outputLabel value="Message can not be empty."
+                               rendered="${!empty param['error']}"/></h3>
 
-                <h:outputLabel value="Message sent."
-                               rendered="${!empty param['success']}"/>
+                <h3><h:outputLabel value="Message sent."
+                               rendered="${!empty param['success']}"/></h3>
 
                 <!--TODO add check if seller name is user.-->
                 <!--TODO check if seller is logged in-->
