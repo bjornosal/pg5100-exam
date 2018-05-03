@@ -40,11 +40,8 @@
             <h3><h:outputLabel value="Message sent."
                                rendered="${!empty param['success']}"/></h3>
 
-            <!--TODO add check if seller name is user.-->
-            <!--TODO check if seller is logged in-->
-            <h3><h:outputLabel rendered="#{!detailController.sellerOnlyCurrentUser}">Sellers</h:outputLabel></h3>
+            <h3>Sellers</h3>
 
-            <!--TODO possible new query to get sellers without current seller-->
             <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable"
                          rendered="#{homeController.book.sellers.size() ne 0}">
 

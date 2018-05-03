@@ -24,8 +24,6 @@ public class HomeController implements Serializable{
 
     private Book book;
 
-    //TODO this is at fault?
-    //TODO create service method which creates a hashmap with books that current user is selling?
     private Map<Long, List<String>> booksForm = new HashMap<>();
 
     public boolean markBook(Book book) {
@@ -77,8 +75,6 @@ public class HomeController implements Serializable{
         booksForm.put(book.getId(),sellers);
         return bookService.removeUserAsSeller(email, book.getId());
     }
-
-
 
     public String toDetailPage(Book book) {
         this.book = book;

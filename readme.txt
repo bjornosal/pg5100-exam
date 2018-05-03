@@ -40,4 +40,19 @@ A user will keep information on which messages they have sent and received.
 I am using the same concept as in the course. I attempted to set up a create script with flyway,
 but I was unable to do so and decided this was the easiest solution for this task.
 
+- Backend Testing
+Passed 70% coverage on backend in JaCoCo.
+
+- Frontend
+All functionality from tasks in E3 has been added.
+Including error messages to users if no books available instead of a table etc.
+
+- Frontend Testing (Selenium)
+All tests has been written as per description.
+Could have been refactored a lot. TODO?
+Code coverage of 91%.
+
+- Extra Functionality
+
+
 
