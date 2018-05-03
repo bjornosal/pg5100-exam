@@ -309,8 +309,6 @@ public abstract class SeleniumTestBase {
         }
 
         assertTrue(foundMessage);
-
-
     }
 
 }
