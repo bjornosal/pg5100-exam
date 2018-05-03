@@ -4,14 +4,15 @@ import no.salbjo16.exams.backend.entity.Message;
 import no.salbjo16.exams.backend.service.MessageService;
 import no.salbjo16.exams.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.SessionScope;
 
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.*;
 
 @Named
-@SessionScope
-public class MessageController {
+@SessionScoped
+public class MessageController implements Serializable {
 
     @Autowired
     private MessageService messageService;

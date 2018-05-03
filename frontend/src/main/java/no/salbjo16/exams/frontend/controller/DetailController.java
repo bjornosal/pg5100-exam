@@ -1,13 +1,13 @@
 package no.salbjo16.exams.frontend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.SessionScope;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named
-@SessionScope
-public class DetailController {
+@RequestScoped
+public class DetailController  {
 
 
     @Autowired

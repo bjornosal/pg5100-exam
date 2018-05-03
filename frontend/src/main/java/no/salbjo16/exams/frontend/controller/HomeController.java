@@ -82,8 +82,7 @@ public class HomeController implements Serializable{
 
     public String toDetailPage(Book book) {
         this.book = book;
-
-        return "/book-detail.jsf&faces-redirect=true";
+        return "/book-detail.jsf";
     }
 
     public Book getBook() {
