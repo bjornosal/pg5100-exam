@@ -21,6 +21,10 @@
 .idea/**/gradle.xml
 .idea/**/libraries
 
+/backend/target
+/frontend/target
+/report/target
+
 # CMake
 cmake-build-debug/
 cmake-build-release/
