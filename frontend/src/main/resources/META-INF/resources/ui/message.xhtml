@@ -20,47 +20,46 @@
         <sec:authenticated>
             <h:outputText value="Welcome to Used Books Corp #{userInfoController.fullNameOfCurrentUser}!"/>
 
-            <!--TODO wat-->
-
-
-            <h:form prependId="false" rendered="#{homeController.book.sellers.size() gt '0'}">
-                <h4><h:outputLabel value="Title: #{homeController.book.title}"/></h4>
-                <h:outputLabel value="Author(s):" />
-                <ul>
-                    <ui:repeat var="author" value="#{homeController.book.authors}" >
-                        <li>
-                            <h:outputLabel value="#{author}"/>
-                        </li>
-                    </ui:repeat>
-                </ul>
-                <h:outputLabel value="#{homeController.book.course}" />
-                <h5>Sellers</h5>
-
-                <!--TODO add check if seller name is user.-->
-                <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable">
+            <h:form prependId="false" rendered="#{messageController.sentMessages.size() gt '0'}">
+                <h4><h:outputLabel value="Sent Messages"/></h4>
+                <h:dataTable value="#{messageController.sentMessages}" var="sentMessage" border="1" id="sentMessagesTable">
                     <h:column>
-                        <f:facet name="header">Seller</f:facet>
-                        <h:outputLabel value="#{userInfoController.getFullNameByEmail(seller.email)}" class="sellerName"/>
+                        <f:facet name="header">Recipient</f:facet>
+                        <h:outputLabel value="#{sentMessage.recipient.name} #{sentMessage.recipient.surname}" class="sentMessagesTable"/>
+                    </h:column>
+
+
+
+                    <h:column>
+                        <f:facet name="header">Message</f:facet>
+                        <h:outputText value="#{sentMessage.text}" />
+                    </h:column>
+
+                </h:dataTable>
+            </h:form>
+
+            <h:form prependId="false" rendered="#{messageController.sentMessages.size() eq  0}">
+                <h3>No sent messages.</h3>
+            </h:form>
+
+            <h:form prependId="false" rendered="#{messageController.receivedMessages.size() gt '0'}">
+                <h4><h:outputLabel value="Received Messages"/></h4>
+                <h:dataTable value="#{messageController.receivedMessages}" var="receivedMessage" border="1" id="receivedMessagesTable">
+                    <h:column>
+                        <f:facet name="header">From</f:facet>
+                        <h:outputLabel value="#{receivedMessage.sender.name} #{receivedMessage.sender.surname}" class="receivedMessagesName"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:inputTextarea value="#{messageController.messageForm[seller.email]}"
-                                         id="checkBox_#{seller.email}"
-                                         class="messageTo_#{seller.email}" />
+                        <h:outputText value="#{receivedMessage.text}" />
                     </h:column>
 
-                    <h:column>
-                        <f:facet name="header">Send Message</f:facet>
-                        <h:commandButton value="Send Message!" id="sendBtnId" action="#{messageController.sendMessage(seller.email)}"/>
-                    </h:column>
                 </h:dataTable>
             </h:form>
 
-
-
-            <h:form prependId="false" rendered="#{homeController.book.sellers.size() eq  0}">
-                <h3>No books for sale.</h3>
+            <h:form prependId="false" rendered="#{messageController.receivedMessages.size() eq  0}">
+                <h3>No sent messages.</h3>
             </h:form>
         </sec:authenticated>
 

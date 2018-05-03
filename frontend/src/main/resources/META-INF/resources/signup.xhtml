@@ -14,8 +14,8 @@
     <ui:define name="content">
 
         <h:form prependId="false">
-            <h:outputLabel value="User and/or password are wrong."
-                           rendered="${!empty param['error']}"/>
+            <h:outputLabel value="Fill in all fields. &lt;br/&gt; Email has to be a valid email."
+                           rendered="${!empty param['error']}" escape="false"/>
 
             <div>
                 <h:outputText value="Name: "/>

@@ -22,6 +22,9 @@
 
             <!--TODO wat-->
             <h:form prependId="false" rendered="#{homeController.book.sellers.size() gt '0'}">
+
+
+
                 <h4><h:outputLabel value="Title: #{homeController.book.title}"/></h4>
                 <h:outputLabel value="Author(s):" />
                 <ul>
@@ -33,6 +36,13 @@
                 </ul>
                 <h:outputLabel value="#{homeController.book.course}" />
                 <h5>Sellers</h5>
+
+
+                <h:outputLabel value="Message can not be empty."
+                               rendered="${!empty param['error']}"/>
+
+                <h:outputLabel value="Message sent."
+                               rendered="${!empty param['success']}"/>
 
                 <!--TODO add check if seller name is user.-->
                 <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable">
