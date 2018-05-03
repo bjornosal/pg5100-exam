@@ -1,5 +1,6 @@
 package no.salbjo16.exams.backend.service;
 
+import no.salbjo16.exams.backend.entity.Message;
 import no.salbjo16.exams.backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @Transactional
@@ -45,5 +47,19 @@ public class UserService {
         String name = em.find(User.class, email).getName();
         String surname = em.find(User.class, email).getSurname();
         return name + " " + surname;
+    }
+
+    public List<Message> getSentMessages(String email) {
+        TypedQuery<Message> query = em.createQuery("SELECT m FROM Message m WHERE m.sender.email = ?1", Message.class);
+        query.setParameter(1, email);
+
+        return query.getResultList();
+    }
+
+    public List<Message> getReceivedMessages(String email) {
+        TypedQuery<Message> query = em.createQuery("SELECT m FROM Message m WHERE m.recipient.email = ?1", Message.class);
+        query.setParameter(1, email);
+
+        return query.getResultList();
     }
 }

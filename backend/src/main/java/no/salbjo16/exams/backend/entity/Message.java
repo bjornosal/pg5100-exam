@@ -26,7 +26,7 @@ public class Message {
 
     @NotNull
     @ManyToOne
-    private User receiver;
+    private User recipient;
 
     public Long getId() {
         return id;
@@ -52,11 +52,11 @@ public class Message {
         this.sender = sender;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public User getRecipient() {
+        return recipient;
     }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
     }
 }

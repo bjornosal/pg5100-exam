@@ -66,23 +66,4 @@ public class BookService {
         TypedQuery<Book> query = em.createQuery("SELECT b from Book b WHERE b.sellers.size >= 1", Book.class);
         return query.getResultList();
     }
-
-    //TODO remove this
-/*
-    public HashMap<Long, Boolean> getAllBooksThatUserIsSelling(String email) {
-
-        HashMap<Long, Boolean> booksForSale = new HashMap<>();
-
-        List<Book> books = getAllBooks();
-        for(Book book : books) {
-            for(User user : book.getSellers()) {
-                if(user.getEmail().equals(email)) {
-                    booksForSale.put(book.getId(), true);
-                }
-            }
-        }
-        return booksForSale;
-    }*/
-
-
 }

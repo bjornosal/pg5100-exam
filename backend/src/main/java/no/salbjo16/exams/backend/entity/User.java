@@ -13,6 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name="USERS")
 public class User {
+//TODO implement "Logged In"
+
 
     @Id
     @NotBlank
@@ -37,7 +39,7 @@ public class User {
     @OneToMany(mappedBy = "sender", cascade =   CascadeType.ALL)
     private List<Message> sentMessages;
 
-    @OneToMany(mappedBy = "receiver", cascade =   CascadeType.ALL)
+    @OneToMany(mappedBy = "recipient", cascade =   CascadeType.ALL)
     private List<Message> receivedMessages;
 
     //Needs an empty constructor

@@ -26,7 +26,7 @@ public class MessageService {
         Message message = new Message();
         message.setText(messageText);
         message.setSender(sender);
-        message.setReceiver(recipient);
+        message.setRecipient(recipient);
 
         em.persist(message);
         return message.getId();

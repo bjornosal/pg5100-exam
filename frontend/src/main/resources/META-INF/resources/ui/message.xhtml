@@ -11,7 +11,7 @@
 
     <!--TODO UPDATE AS PER EX-->
     <ui:define name="title">
-        Details
+        EXAM
     </ui:define>
 
     <ui:define name="content">
@@ -21,6 +21,8 @@
             <h:outputText value="Welcome to Used Books Corp #{userInfoController.fullNameOfCurrentUser}!"/>
 
             <!--TODO wat-->
+
+
             <h:form prependId="false" rendered="#{homeController.book.sellers.size() gt '0'}">
                 <h4><h:outputLabel value="Title: #{homeController.book.title}"/></h4>
                 <h:outputLabel value="Author(s):" />
