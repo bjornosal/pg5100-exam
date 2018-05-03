@@ -34,25 +34,27 @@
                 <h:outputLabel value="#{homeController.book.course}" />
                 <h5>Sellers</h5>
 
-
                 <!--TODO add check if seller name is user.-->
-                <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="booksTable" >
+                <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable">
                     <h:column>
                         <f:facet name="header">Seller</f:facet>
-                        <h:outputLabel value="#{userInfoController.getFullNameByEmail(seller.email)}" class="bookTitle"/>
+                        <h:outputLabel value="#{userInfoController.getFullNameByEmail(seller.email)}" class="sellerName"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:inputTextarea class="sendMessageField"/>
+                        <h:inputTextarea value="#{messageController.messageForm[seller.email]}"
+                                         id="checkBox_#{seller.email}"
+                                         class="messageTo_#{seller.email}" />
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Send Message</f:facet>
-                        <h:commandButton value="Message" />
+                        <h:commandButton value="Send Message!" id="sendBtnId" action="#{messageController.sendMessage(seller.email)}"/>
                     </h:column>
                 </h:dataTable>
             </h:form>
+
 
 
             <h:form prependId="false" rendered="#{homeController.book.sellers.size() eq  0}">
