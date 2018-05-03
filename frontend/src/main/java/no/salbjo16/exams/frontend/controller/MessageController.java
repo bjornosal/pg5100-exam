@@ -44,8 +44,6 @@ public class MessageController {
         return userService.getReceivedMessages(userInfoController.getUserName());
     }
 
-
-
     public Map<String, String> getMessageForm() {
         return messageForm;
     }

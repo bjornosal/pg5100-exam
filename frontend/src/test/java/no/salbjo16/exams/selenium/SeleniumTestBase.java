@@ -1,11 +1,10 @@
 package no.salbjo16.exams.selenium;
 
-import javafx.beans.property.ReadOnlyBooleanWrapper;
-import no.salbjo16.exams.backend.entity.Book;
 import no.salbjo16.exams.backend.service.BookService;
 import no.salbjo16.exams.selenium.po.BookDetailPO;
 import no.salbjo16.exams.selenium.po.IndexPO;
 import no.salbjo16.exams.selenium.po.SignUpPO;
+import no.salbjo16.exams.selenium.po.ui.MessagePO;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -29,6 +28,7 @@ public abstract class SeleniumTestBase {
     private BookService bookService;
 
     private BookDetailPO detail;
+    private MessagePO message;
     private IndexPO home;
 
     private final String BOOKS_TABLE = "booksTable:";
@@ -168,24 +168,91 @@ public abstract class SeleniumTestBase {
         assertFalse(home.isLoggedIn());
         home = createNewUser(emailOne, passwordOne, nameOne, surnameOne);
         assertTrue(home.isLoggedIn());
-
         home.clickToSellBook(ROW_TO_TEST);
-        detail = home.goToDetailOfBook(ROW_TO_TEST);
+        long sellers = home.getSellersForBookOnRow(ROW_TO_TEST);
+        detail = home.toDetailOfBook(ROW_TO_TEST);
 
-        assertEquals(emailOne, detail.getFirstSeller());
+
+        boolean userOneIsMarkedAsSeller = false;
+        for(int i = 0; i < sellers ; i++) {
+            System.out.println("sellerTable:"+i+":"+"sellerEmail");
+            System.out.println(emailOne);
+            if(detail.getSeller("sellerTable:"+i+":").equalsIgnoreCase(emailOne)) {
+                userOneIsMarkedAsSeller = true;
+            }
+        }
+        assertTrue(userOneIsMarkedAsSeller);
+
+        //Logging out with user one
         home.doLogout();
-
         assertFalse(home.isLoggedIn());
+
+        //Logging in with user two
         createNewUser(emailTwo, passwordTwo, nameTwo, surnameTwo);
-
         assertTrue(home.isLoggedIn());
-        home.goToDetailOfBook(ROW_TO_TEST);
 
-        assertEquals(emailOne, detail.getFirstSeller());
+        detail = home.toDetailOfBook(ROW_TO_TEST);
+
+        userOneIsMarkedAsSeller = false;
+        for(int i = 0; i < sellers ; i++) {
+            if(detail.getSeller("sellerTable:"+i+":").equalsIgnoreCase(emailOne)) {
+                userOneIsMarkedAsSeller = true;
+            }
+        }
+        assertTrue(userOneIsMarkedAsSeller);
+
         home.doLogout();
         assertFalse(home.isLoggedIn());
     }
 
+    @Test
+    public void testMessages() {
+        String emailOne = getUniqueId();
+        String passwordOne = "password";
+        String nameOne = "nameOne";
+        String surnameOne = "surnameOne";
+
+        String emailTwo= getUniqueId();
+        String passwordTwo = "passwordTwo";
+        String nameTwo = "nameTwo";
+        String surnameTwo = "surnameTwo";
+
+        String messageText = "TEST_MESSAGE";
+
+        //TODO make sure both users exist?
+
+        assertFalse(home.isLoggedIn());
+        home = createNewUser(emailOne, passwordOne, nameOne, surnameOne);
+        assertTrue(home.isLoggedIn());
+
+        home.clickToSellBook(ROW_TO_TEST);
+        home.doLogout();
+
+        //Logging out user one.
+        assertFalse(home.isLoggedIn());
+
+        //Logging in user two.
+        createNewUser(emailTwo, passwordTwo, nameTwo, surnameTwo);
+        assertTrue(home.isLoggedIn());
+
+        long sellers = home.getSellersForBookOnRow(ROW_TO_TEST);
+        detail = home.toDetailOfBook(ROW_TO_TEST);
+
+        boolean userOneIsMarkedAsSeller = false;
+        int rowUserOneIsOn = -1;
+        for(int i = 0; i < sellers ; i++) {
+            if(detail.getSeller("sellerTable:"+i+":").equalsIgnoreCase(emailOne)) {
+                userOneIsMarkedAsSeller = true;
+                rowUserOneIsOn = i;
+            }
+        }
+        assertTrue(userOneIsMarkedAsSeller);
+
+        detail.sendMessageToSellerOnRow("sellerTable:"+rowUserOneIsOn+":", messageText);
+        detail.clickToSendMessage("sellerTable:"+rowUserOneIsOn+":");
+
+        message = home.toMessages();
+    }
 
 
 

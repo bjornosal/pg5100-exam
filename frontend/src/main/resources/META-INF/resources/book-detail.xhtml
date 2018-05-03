@@ -68,7 +68,7 @@
                         <f:facet name="header">Message</f:facet>
                         <h:inputTextarea rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
                                          value="#{messageController.messageForm[seller.email]}"
-                                         id="checkBox_#{seller.email}"
+                                         id="messageBox"
                                          class="messageTo_#{seller.email}" />
                         <h:outputLabel rendered="#{detailController.sellerIsCurrentUser(seller.email)}" value="You are the seller."/>
                     </h:column>

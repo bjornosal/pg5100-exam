@@ -22,7 +22,14 @@ public class ResetService {
     public void resetDatabase() {
         Query query = em.createNativeQuery("DELETE FROM book_authors");
         query.executeUpdate();
+
         query = em.createNativeQuery("DELETE FROM USER_ROLES");
+        query.executeUpdate();
+
+        query = em.createNativeQuery("DELETE FROM BOOK_SELLERS");
+        query.executeUpdate();
+
+        query = em.createNativeQuery("DELETE FROM BOOK");
         query.executeUpdate();
 
         deleteEntities(Message.class);

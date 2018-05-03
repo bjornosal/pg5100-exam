@@ -1,6 +1,7 @@
 package no.salbjo16.exams.selenium.po;
 
 import no.salbjo16.exams.selenium.PageObject;
+import no.salbjo16.exams.selenium.po.ui.MessagePO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -32,6 +33,22 @@ public abstract class LayoutPO extends PageObject {
         assertTrue(po.isOnPage());
 
         return po;
+    }
+
+    public IndexPO doLogin() {
+        clickAndWait("linkToLoginId");
+        IndexPO po = new IndexPO(this);
+        assertTrue(po.isOnPage());
+        return po;
+
+    }
+
+    public MessagePO toMessages() {
+        clickAndWait("messagesId");
+
+        MessagePO messagePO = new MessagePO(this);
+        assertTrue(messagePO.isOnPage());
+        return messagePO;
     }
 
     public boolean isLoggedIn(){

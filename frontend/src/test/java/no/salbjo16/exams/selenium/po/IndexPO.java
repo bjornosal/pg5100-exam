@@ -54,7 +54,7 @@ public class IndexPO extends LayoutPO {
         clickAndWait(row+"sellBtn");
     }
 
-    public BookDetailPO goToDetailOfBook(String row) {
+    public BookDetailPO toDetailOfBook(String row) {
         clickAndWait(row+"detailBtn");
 
         BookDetailPO po = new BookDetailPO(this);
@@ -63,14 +63,4 @@ public class IndexPO extends LayoutPO {
         return po;
     }
 
-    //TODO how to add a new "match", anything and wait for click
-   /* public MatchPO startNewMatch(){
-
-        clickAndWait("newMatchBtnId");
-        MatchPO po = new MatchPO(this);
-
-        assertTrue(po.isOnPage());
-
-        return po;
-    }*/
 }

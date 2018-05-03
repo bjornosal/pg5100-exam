@@ -4,7 +4,7 @@ import no.salbjo16.exams.backend.entity.Book;
 import no.salbjo16.exams.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Named
-@ApplicationScoped
+@SessionScoped
 public class HomeController implements Serializable{
 
     @Autowired
@@ -21,7 +21,6 @@ public class HomeController implements Serializable{
 
     @Autowired
     private UserInfoController userInfoController;
-
 
     private Book book;
 
