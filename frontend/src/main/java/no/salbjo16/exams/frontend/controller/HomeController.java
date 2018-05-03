@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,16 +27,19 @@ public class HomeController implements Serializable{
 
     //TODO this is at fault?
     //TODO create service method which creates a hashmap with books that current user is selling?
-    private Map<Long, Boolean> checksForm = new HashMap<>();
-
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
-    }
+    private Map<Long, List<String>> booksForm = new HashMap<>();
 
     public boolean markBook(Book book) {
-        if(checksForm.get(book.getId()) != null) {
+        if(booksForm.get(book.getId()) != null) {
 
-            if(checksForm.get(book.getId())) {
+            List<String> sellers = booksForm.get(book.getId());
+            boolean userIsSelling = false;
+
+            for(String email : sellers) {
+                userIsSelling = email.equalsIgnoreCase(userInfoController.getUserName());
+            }
+
+            if(userIsSelling) {
                 return markAsNotSelling(book);
             } else {
                 return markAsSelling(book);
@@ -44,22 +48,38 @@ public class HomeController implements Serializable{
         return markAsSelling(book);
     }
 
+    public boolean isUserSelling(Long bookId) {
+        if(booksForm.get(bookId) != null) {
+            for (String email : booksForm.get(bookId)) {
+                if (email.equalsIgnoreCase(userInfoController.getUserName()))
+                    return true;
+            }
+        }
+        return false;
+    }
 
     private boolean markAsSelling(Book book) {
         String email = userInfoController.getUserName();
-        checksForm.put(book.getId(), true);
-        System.out.println(book.getId());
+        List<String> sellers = new ArrayList<>();
+        if(booksForm.get(book.getId()) != null) {
+            sellers = booksForm.get(book.getId());
+            sellers.add(email);
+        } else {
+            sellers.add(email);
+            booksForm.put(book.getId(), sellers);
+        }
         return bookService.addUserAsSeller(email, book.getId());
-
     }
 
     private boolean markAsNotSelling(Book book) {
         String email = userInfoController.getUserName();
-        checksForm.put(book.getId(), false);
-        System.out.println(book.getId());
+        List<String> sellers = booksForm.get(book.getId());
+        sellers.remove(email);
+        booksForm.put(book.getId(),sellers);
         return bookService.removeUserAsSeller(email, book.getId());
-
     }
+
+
 
     public String toDetailPage(Book book) {
         this.book = book;
@@ -75,14 +95,11 @@ public class HomeController implements Serializable{
         this.book = book;
     }
 
-    public Map<Long, Boolean> getChecksForm() {
-        return checksForm;
+    public Map<Long, List<String>> getBooksForm() {
+        return booksForm;
     }
 
-    public void setChecksForm(Map<Long, Boolean> checksForm) {
-        this.checksForm = checksForm;
+    public void setBooksForm(Map<Long, List<String>> booksForm) {
+        this.booksForm = booksForm;
     }
-
-
-
 }

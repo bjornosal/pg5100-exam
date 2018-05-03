@@ -50,7 +50,7 @@
                     <h:column>
                         <f:facet name="header">Sell</f:facet>
                         <h:selectBooleanCheckbox
-                                value="#{homeController.checksForm[book.id]}"
+                                value="#{homeController.isUserSelling(book.id)}"
                                 id="checkBox_#{book.id}"
                                 class="k#{book.id}"
                                 disabled="true"/>

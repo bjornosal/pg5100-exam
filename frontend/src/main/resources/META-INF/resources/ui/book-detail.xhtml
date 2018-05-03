@@ -20,7 +20,6 @@
         <sec:authenticated>
             <h:outputText value="Welcome to Used Books Corp #{userInfoController.fullNameOfCurrentUser}!"/>
 
-            <!--TODO wat-->
             <h:form prependId="false" rendered="#{homeController.book.sellers.size() gt '0'}">
 
 
@@ -35,7 +34,6 @@
                     </ui:repeat>
                 </ul>
                 <h:outputLabel value="#{homeController.book.course}" />
-                <h5>Sellers</h5>
 
 
                 <h:outputLabel value="Message can not be empty."
@@ -45,7 +43,11 @@
                                rendered="${!empty param['success']}"/>
 
                 <!--TODO add check if seller name is user.-->
+                <!--TODO check if seller is logged in-->
+                <h:outputLabel>Sellers</h:outputLabel>
+
                 <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable">
+
                     <h:column>
                         <f:facet name="header">Seller</f:facet>
                         <h:outputLabel value="#{userInfoController.getFullNameByEmail(seller.email)}" class="sellerName"/>
@@ -65,11 +67,8 @@
                 </h:dataTable>
             </h:form>
 
+            <h3><h:outputLabel prependId="false" rendered="#{homeController.book.sellers.size() eq  0}" value="No books for sale."/></h3>
 
-
-            <h:form prependId="false" rendered="#{homeController.book.sellers.size() eq  0}">
-                <h3>No books for sale.</h3>
-            </h:form>
         </sec:authenticated>
 
         <sec:anonymous>
