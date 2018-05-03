@@ -17,12 +17,12 @@ public class DetailController {
     private HomeController homeController;
 
     public boolean sellerIsCurrentUser(String email){
-        System.out.println(userInfoController.getUserName().equalsIgnoreCase(email));
         return userInfoController.getUserName().equalsIgnoreCase(email);
     }
 
     public boolean isSellerOnlyCurrentUser() {
-        return (homeController.getBook().getSellers().size() == 1)
-                && homeController.getBook().getSellers().get(0).getEmail().equalsIgnoreCase(userInfoController.getUserName());
+        return (homeController.getBook().getSellers().size() == 1) &&
+                userInfoController.getUserName() != null &&
+                homeController.getBook().getSellers().get(0).getEmail().equalsIgnoreCase(userInfoController.getUserName());
     }
 }

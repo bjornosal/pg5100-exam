@@ -5,7 +5,6 @@ import no.salbjo16.exams.selenium.po.SignUpPO;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,34 +12,29 @@ import static org.junit.Assert.*;
 
 public abstract class SeleniumTestBase {
 
-
     protected abstract WebDriver getDriver();
 
     protected abstract String getServerHost();
 
     protected abstract int getServerPort();
 
-//TODO Add the service here
-//    @Autowired
-//    private QuizService quizService;
-
     private static final AtomicInteger counter = new AtomicInteger(0);
 
-    private String getUniqueId(){
-        return "foo_SeleniumLocalIT_" + counter.getAndIncrement();
+    private String getUniqueId() {
+        return "foo_SeleniumLocalIT_" + counter.getAndIncrement() + "@test.com";
     }
 
 
     private IndexPO home;
 
 
-    private IndexPO createNewUser(String username, String password){
+    private IndexPO createNewUser(String email, String password, String name, String surname){
 
         home.toStartingPage();
 
         SignUpPO signUpPO = home.toSignUp();
 
-        IndexPO indexPO = signUpPO.createUser(username, password);
+        IndexPO indexPO = signUpPO.createUser(email,password,name,surname);
         assertNotNull(indexPO);
 
         return indexPO;
@@ -64,25 +58,44 @@ public abstract class SeleniumTestBase {
 
 
     @Test
-    public void testCreateAndLogoutUser(){
+    public void testCreateAndLogoutUser() {
 
         assertFalse(home.isLoggedIn());
 
-        String username = getUniqueId();
+        String email = getUniqueId();
         String password = "123456789";
-        home = createNewUser(username, password);
+        String name = "TestName";
+        String surname = "TestSurname";
+
+        home = createNewUser(email,password,name,surname);
 
         assertTrue(home.isLoggedIn());
-        assertTrue(home.getDriver().getPageSource().contains(username));
+        assertTrue(home.getDriver().getPageSource().contains(name));
 
         home.doLogout();
 
         assertFalse(home.isLoggedIn());
-        assertFalse(home.getDriver().getPageSource().contains(username));
+        assertFalse(home.getDriver().getPageSource().contains(name));
     }
 
     @Test
-    public void testValuesAreEqual() {
-        assertTrue("isTrue", true);
+    public void testDefaultBooks() {
+        assertTrue(home.isOnPage());
+        assertFalse(home.isLoggedIn());
+        assertTrue(home.defaultBooksAreDisplayed());
     }
+
+    @Test
+    public void testRegisterSelling() {
+        assertFalse(home.isLoggedIn());
+        assertTrue(home.isOnPage());
+        assertFalse(home.isForSaleMarkerDisplayed("booksTable:0:"));
+        assertFalse(home.isSellButtonDisplayed("booksTable:0:"));
+
+
+    }
+
+
+
+
 }

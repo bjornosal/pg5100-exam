@@ -17,7 +17,13 @@ public class UserInfoController {
     private UserService userService;
 
     public String getUserName(){
-        return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        String name = "";
+        try {
+            name = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        } catch (ClassCastException e) {
+            //Does not do anything with it.
+        }
+        return name;
     }
 
     public String getFullNameOfCurrentUser() {

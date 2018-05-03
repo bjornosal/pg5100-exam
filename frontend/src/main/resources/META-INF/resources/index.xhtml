@@ -18,32 +18,40 @@
         <h2>Used Books Corp</h2>
 
         <sec:authenticated>
-            <h:outputText value="Welcome to Used Books Corp &lt;b&gt;#{userInfoController.fullNameOfCurrentUser}&lt;/b&gt;!"/>
+            <h:outputText value="Welcome to Used Books #{userInfoController.fullNameOfCurrentUser}!"/>
         </sec:authenticated>
 
         <h3>Books</h3>
 
 
-        <h:form id="createForm" prependId="false">
+        <h:form prependId="false">
             <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable">
                 <h:column>
                     <f:facet name="header">Title</f:facet>
-                    <h:outputLabel value="#{book.title}" class="bookTitle"/>
+                    <h:outputLabel value="#{book.title}"
+                                   class="bookTitle"
+                                   id="title"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Author(s)</f:facet>
-                    <h:outputLabel value="#{book.authors}" class="bookAuthors"/>
+                    <h:outputLabel value="#{book.authors}"
+                                   class="bookAuthors"
+                                   id="authors"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Course</f:facet>
-                    <h:outputLabel value="#{book.course}" class="bookCourse"/>
+                    <h:outputLabel value="#{book.course}"
+                                   class="bookCourse"
+                                   id="course"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Sellers</f:facet>
-                    <h:outputLabel value="#{book.sellers.size()}" class="bookSellers"/>
+                    <h:outputLabel value="#{book.sellers.size()}"
+                                   class="bookSellers"
+                                   id="seller"/>
                 </h:column>
 
                 <sec:authenticated>
@@ -51,19 +59,23 @@
                         <f:facet name="header">Sell</f:facet>
                         <h:selectBooleanCheckbox
                                 value="#{homeController.isUserSelling(book.id)}"
-                                id="checkBox_#{book.id}"
+                                id="checkBox"
                                 class="k#{book.id}"
                                 disabled="true"/>
-                        <h:commandButton value="(Un)Mark Sell" action="#{homeController.markBook(book)}"/>
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Details</f:facet>
-                        <h:commandButton id="detailBtn_#{book.getId}"
-                                         value="Details"
-                                         action="#{homeController.toDetailPage(book)}"/>
+                        <h:commandButton
+                                value="(Un)Mark Sell"
+                                action="#{homeController.markBook(book)}"
+                                id="sellBtn"
+                        />
                     </h:column>
                 </sec:authenticated>
+
+                <h:column>
+                    <f:facet name="header">Details</f:facet>
+                    <h:commandButton id="detailBtn"
+                                     value="Details"
+                                     action="#{homeController.toDetailPage(book)}"/>
+                </h:column>
 
             </h:dataTable>
         </h:form>

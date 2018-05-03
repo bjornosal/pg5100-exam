@@ -21,7 +21,6 @@ public class SeleniumDriverHandler {
 
     private static boolean setupDriverExecutable(String executableName, String property) {
         String homeDir = System.getProperty("user.home");
-        System.out.println(homeDir);
 
         //first try Linux/Mac executable
         if (!tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName))) {

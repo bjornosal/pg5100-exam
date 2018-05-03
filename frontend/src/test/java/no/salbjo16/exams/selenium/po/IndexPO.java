@@ -22,13 +22,33 @@ public class IndexPO extends LayoutPO {
     @Override
     public boolean isOnPage() {
         //TODO replace with title of Index Page
-        return getDriver().getTitle().contains("EXAM");
+        return getDriver().getTitle().contains("USED BOOKS");
     }
 
     public boolean isLoggedIn() {
         return getDriver().findElements(By.id("logoutId")).size() > 0 &&
                 getDriver().findElements((By.id("linkToSignupId"))).isEmpty();
     }
+
+    public boolean defaultBooksAreDisplayed() {
+        return getDriver().findElement(By.id("booksTable:0:title")).isDisplayed() &&
+                getDriver().findElement(By.id("booksTable:1:title")).isDisplayed();
+    }
+
+    public boolean isForSaleMarkerDisplayed(String row) {
+        return getDriver().findElements(By.id(row+"checkBox")).size() > 0;
+    }
+
+    public boolean isSellButtonDisplayed(String row) {
+        return getDriver().findElements(By.id(row+"sellBtn")).size() > 0;
+    }
+
+
+    public void clickToSellBook(String row) {
+        clickAndWait(row+"sellBtn");
+    }
+
+
 
     //TODO how to add a new "match", anything and wait for click
    /* public MatchPO startNewMatch(){

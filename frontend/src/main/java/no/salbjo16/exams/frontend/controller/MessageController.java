@@ -28,11 +28,11 @@ public class MessageController {
 
     public String sendMessage(String recipientEmail) {
         if(messageForm.get(recipientEmail).isEmpty()) {
-            return "/ui/book-detail.jsf?faces-redirect=true&error=true";
+            return "/book-detail.jsf?faces-redirect=true&error=true";
         } else {
             messageService.sendMessage(messageForm.get(recipientEmail), userInfoController.getUserName(), recipientEmail);
             messageForm.put(recipientEmail, "");
-            return "/ui/book-detail.jsf?faces-redirect=true&success=true";
+            return "/book-detail.jsf?faces-redirect=true&success=true";
         }
     }
 
