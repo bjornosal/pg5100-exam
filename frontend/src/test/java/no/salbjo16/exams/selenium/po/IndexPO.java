@@ -43,6 +43,12 @@ public class IndexPO extends LayoutPO {
         return getDriver().findElements(By.id(row+"sellBtn")).size() > 0;
     }
 
+    public long getSellersForBookOnRow(String row) {
+        String sellers = getDriver().findElement(By.id(row+"seller")).getText();
+        return Long.parseLong(sellers);
+
+    }
+
 
     public void clickToSellBook(String row) {
         clickAndWait(row+"sellBtn");

@@ -1,10 +1,13 @@
 package no.salbjo16.exams.selenium;
 
+import no.salbjo16.exams.backend.entity.Book;
+import no.salbjo16.exams.backend.service.BookService;
 import no.salbjo16.exams.selenium.po.IndexPO;
 import no.salbjo16.exams.selenium.po.SignUpPO;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,12 +23,16 @@ public abstract class SeleniumTestBase {
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
+    @Autowired
+    private BookService bookService;
+
     private String getUniqueId() {
         return "foo_SeleniumLocalIT_" + counter.getAndIncrement() + "@test.com";
     }
 
 
     private IndexPO home;
+    private final String BOOKS_TABLE = "booksTable:";
 
 
     private IndexPO createNewUser(String email, String password, String name, String surname){
@@ -87,12 +94,59 @@ public abstract class SeleniumTestBase {
 
     @Test
     public void testRegisterSelling() {
+        final String ROW_TO_TEST = BOOKS_TABLE + "0:";
+        final long ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW = home.getSellersForBookOnRow(ROW_TO_TEST);
+
         assertFalse(home.isLoggedIn());
         assertTrue(home.isOnPage());
-        assertFalse(home.isForSaleMarkerDisplayed("booksTable:0:"));
-        assertFalse(home.isSellButtonDisplayed("booksTable:0:"));
+        assertFalse(home.isForSaleMarkerDisplayed(ROW_TO_TEST));
+        assertFalse(home.isSellButtonDisplayed(ROW_TO_TEST));
 
+        try {
+            home.clickToSellBook(ROW_TO_TEST);
+            fail();
+        } catch(Exception e) {
+            //Do nothing
+        }
 
+        String email = getUniqueId();
+        String password = "123456789";
+        String name = "TestName";
+        String surname = "TestSurname";
+
+        home = createNewUser(email,password,name,surname);
+
+        assertTrue(home.isLoggedIn());
+        assertTrue(home.getDriver().getPageSource().contains(name));
+
+        assertTrue(home.isForSaleMarkerDisplayed(ROW_TO_TEST));
+        assertTrue(home.isSellButtonDisplayed(ROW_TO_TEST));
+
+        for(int i = 1; i < bookService.getAllBooks().size(); i++) {
+            assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW, home.getSellersForBookOnRow(ROW_TO_TEST));
+        }
+
+        //At original value
+        assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW, home.getSellersForBookOnRow(ROW_TO_TEST));
+        home.clickToSellBook(ROW_TO_TEST);
+        //UP to one
+        assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW+1, home.getSellersForBookOnRow(ROW_TO_TEST));
+
+        for(int i = 1; i < bookService.getAllBooks().size(); i++) {
+            assertEquals(0, home.getSellersForBookOnRow(BOOKS_TABLE+i+":"));
+        }
+
+        //Down to original value
+        home.clickToSellBook(ROW_TO_TEST);
+        assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW, home.getSellersForBookOnRow(ROW_TO_TEST));
+
+        //Back up one
+        home.clickToSellBook(ROW_TO_TEST);
+        assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW+1, home.getSellersForBookOnRow(ROW_TO_TEST));
+
+        //Asserting counter is 1 after logouts
+        home.doLogout();
+        assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW+1, home.getSellersForBookOnRow(ROW_TO_TEST));
     }
 
 
