@@ -36,6 +36,16 @@ public class MessageController {
         }
     }
 
+    public String sendReply(String recipientEmail) {
+        if(messageForm.get(recipientEmail).isEmpty()) {
+            return "/ui/message.jsf?faces-redirect=true&error=true";
+        } else {
+            messageService.sendMessage(messageForm.get(recipientEmail), userInfoController.getUserName(), recipientEmail);
+            messageForm.put(recipientEmail, "");
+            return "/ui/message.jsf?faces-redirect=true&success=true";
+        }
+    }
+
     public List<Message> getSentMessages() {
         return userService.getSentMessages(userInfoController.getUserName());
     }

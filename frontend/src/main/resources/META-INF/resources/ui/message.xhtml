@@ -20,19 +20,20 @@
         <sec:authenticated>
             <h:outputText value="Welcome to Used Books Corp #{userInfoController.fullNameOfCurrentUser}!"/>
 
-            <h:form prependId="false" rendered="#{messageController.sentMessages.size() gt '0'}">
+            <h:form prependId="false" rendered="#{messageController.sentMessages.size() ne 0}">
                 <h4><h:outputLabel value="Sent Messages"/></h4>
                 <h:dataTable value="#{messageController.sentMessages}" var="sentMessage" border="1" id="sentMessagesTable">
                     <h:column>
                         <f:facet name="header">Recipient</f:facet>
-                        <h:outputLabel value="#{sentMessage.recipient.name} #{sentMessage.recipient.surname}" class="sentMessagesTable"/>
+                        <h:outputLabel value="#{sentMessage.recipient.name} #{sentMessage.recipient.surname}"
+                                       class="sentMessagesTable"
+                                       id="recipientName" />
                     </h:column>
-
-
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:outputText value="#{sentMessage.text}" />
+                        <h:outputText value="#{sentMessage.text}"
+                                      id="messageText"/>
                     </h:column>
 
                 </h:dataTable>
@@ -42,19 +43,41 @@
                 <h3>No sent messages.</h3>
             </h:form>
 
+            <h3><h:outputLabel value="Message can not be empty."
+                               rendered="${!empty param['error']}"/></h3>
+
+            <h3><h:outputLabel value="Message sent."
+                               rendered="${!empty param['success']}"/></h3>
+
             <h:form prependId="false" rendered="#{messageController.receivedMessages.size() gt '0'}">
                 <h4><h:outputLabel value="Received Messages"/></h4>
                 <h:dataTable value="#{messageController.receivedMessages}" var="receivedMessage" border="1" id="receivedMessagesTable">
                     <h:column>
                         <f:facet name="header">From</f:facet>
-                        <h:outputLabel value="#{receivedMessage.sender.name} #{receivedMessage.sender.surname}" class="receivedMessagesName"/>
+                        <h:outputLabel value="#{receivedMessage.sender.name} #{receivedMessage.sender.surname}"
+                                       class="receivedMessagesName"
+                                       id="senderName"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:outputText value="#{receivedMessage.text}" />
+                        <h:outputText value="#{receivedMessage.text}"
+                                      id="senderMessageText"/>
                     </h:column>
 
+                    <h:column>
+                        <f:facet name="header">Message</f:facet>
+                        <h:inputTextarea value="#{messageController.messageForm[receivedMessage.sender.email]}"
+                                         id="messageBox"
+                                         class="messageTo_#{receivedMessage.sender.email}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Send Reply</f:facet>
+                        <h:commandButton value="Send Reply!"
+                                         id="sendReplyBtnId"
+                                         action="#{messageController.sendReply(receivedMessage.sender.email)}"/>
+                    </h:column>
                 </h:dataTable>
             </h:form>
 

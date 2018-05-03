@@ -29,9 +29,6 @@ public class ResetService {
         query = em.createNativeQuery("DELETE FROM BOOK_SELLERS");
         query.executeUpdate();
 
-        query = em.createNativeQuery("DELETE FROM BOOK");
-        query.executeUpdate();
-
         deleteEntities(Message.class);
         deleteEntities(Book.class);
         deleteEntities(User.class);

@@ -35,10 +35,15 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
-    public IndexPO doLogin() {
+    public IndexPO doLogin(String email, String password) {
         clickAndWait("linkToLoginId");
         IndexPO po = new IndexPO(this);
+
+        setText("username", email);
+        setText("password", password);
+        clickAndWait("submit");
         assertTrue(po.isOnPage());
+
         return po;
 
     }

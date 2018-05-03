@@ -1,6 +1,7 @@
 package no.salbjo16.exams.selenium;
 
 import no.salbjo16.exams.backend.service.BookService;
+import no.salbjo16.exams.backend.service.UserService;
 import no.salbjo16.exams.selenium.po.BookDetailPO;
 import no.salbjo16.exams.selenium.po.IndexPO;
 import no.salbjo16.exams.selenium.po.SignUpPO;
@@ -26,6 +27,9 @@ public abstract class SeleniumTestBase {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private UserService userService;
 
     private BookDetailPO detail;
     private MessagePO message;
@@ -212,14 +216,13 @@ public abstract class SeleniumTestBase {
         String nameOne = "nameOne";
         String surnameOne = "surnameOne";
 
-        String emailTwo= getUniqueId();
+        String emailTwo = getUniqueId();
         String passwordTwo = "passwordTwo";
         String nameTwo = "nameTwo";
         String surnameTwo = "surnameTwo";
 
         String messageText = "TEST_MESSAGE";
-
-        //TODO make sure both users exist?
+        String replyText = "TEST_REPLY";
 
         assertFalse(home.isLoggedIn());
         home = createNewUser(emailOne, passwordOne, nameOne, surnameOne);
@@ -240,26 +243,74 @@ public abstract class SeleniumTestBase {
 
         boolean userOneIsMarkedAsSeller = false;
         int rowUserOneIsOn = -1;
-        for(int i = 0; i < sellers ; i++) {
-            if(detail.getSeller("sellerTable:"+i+":").equalsIgnoreCase(emailOne)) {
+        for (int i = 0; i < sellers; i++) {
+            if (detail.getSeller("sellerTable:" + i + ":").equalsIgnoreCase(emailOne)) {
                 userOneIsMarkedAsSeller = true;
                 rowUserOneIsOn = i;
             }
         }
         assertTrue(userOneIsMarkedAsSeller);
 
-        detail.sendMessageToSellerOnRow("sellerTable:"+rowUserOneIsOn+":", messageText);
-        detail.clickToSendMessage("sellerTable:"+rowUserOneIsOn+":");
+        detail.sendMessageToSellerOnRow("sellerTable:" + rowUserOneIsOn + ":", messageText);
+        detail.clickToSendMessage("sellerTable:" + rowUserOneIsOn + ":");
 
         message = home.toMessages();
+
+        boolean foundMessage = false;
+
+
+        //checks that message is sent.
+        for (int i = 0; i < userService.getSentMessages(emailTwo).size(); i++) {
+
+            if (message.findSentMessageWithText(i, messageText))
+                foundMessage = true;
+        }
+        assertTrue(foundMessage);
+
+        home.doLogout();
+        //Logging out user two.
+
+        //Logging in user one.
+        home = home.doLogin(emailOne, passwordOne);
+        message = home.toMessages();
+        foundMessage = false;
+        //Checks that message is received.
+        int rowOfMessage = -1;
+        for (int i = 0; i < userService.getReceivedMessages(emailOne).size(); i++) {
+
+            if (message.findReceivedMessageWithText(i, messageText)) {
+                foundMessage = true;
+                rowOfMessage = i;
+            }
+        }
+        assertTrue(foundMessage);
+
+        message.setReplyMessage(rowOfMessage, replyText);
+        message.sendReplyMessage(rowOfMessage);
+
+        home.doLogout();
+
+        home = home.doLogin(emailTwo, passwordTwo);
+        message = home.toMessages();
+
+        foundMessage = false;
+        for (int i = 0; i < userService.getSentMessages(emailTwo).size(); i++) {
+
+            if (message.findSentMessageWithText(i, messageText))
+                foundMessage = true;
+        }
+        assertTrue(foundMessage);
+
+        foundMessage = false;
+        for (int i = 0; i < userService.getReceivedMessages(emailTwo).size(); i++) {
+
+            if (message.findReceivedMessageWithText(i, replyText))
+                foundMessage = true;
+        }
+
+        assertTrue(foundMessage);
+
+
     }
-
-
-
-
-
-
-
-
 
 }
