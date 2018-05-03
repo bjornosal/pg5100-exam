@@ -28,38 +28,42 @@ public class HomeController implements Serializable{
     //TODO create service method which creates a hashmap with books that current user is selling?
     private Map<Long, Boolean> checksForm = new HashMap<>();
 
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
+    }
 
-    public void markBook(Book book) {
+    public boolean markBook(Book book) {
         if(checksForm.get(book.getId()) != null) {
 
             if(checksForm.get(book.getId())) {
-                markAsNotSelling(book);
+                return markAsNotSelling(book);
             } else {
-                markAsSelling(book);
+                return markAsSelling(book);
             }
         }
-        markAsSelling(book);
+        return markAsSelling(book);
     }
 
 
-    private void markAsSelling(Book book) {
+    private boolean markAsSelling(Book book) {
         String email = userInfoController.getUserName();
         checksForm.put(book.getId(), true);
         System.out.println(book.getId());
-         bookService.addUserAsSeller(email, book.getId());
+        return bookService.addUserAsSeller(email, book.getId());
 
     }
 
-    private void markAsNotSelling(Book book) {
+    private boolean markAsNotSelling(Book book) {
         String email = userInfoController.getUserName();
         checksForm.put(book.getId(), false);
         System.out.println(book.getId());
-         bookService.removeUserAsSeller(email, book.getId());
+        return bookService.removeUserAsSeller(email, book.getId());
 
     }
 
     public String toDetailPage(Book book) {
         this.book = book;
+
         return "/ui/book-detail.jsf&faces-redirect=true";
     }
 

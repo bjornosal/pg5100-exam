@@ -59,9 +59,9 @@
 
                     <h:column>
                         <f:facet name="header">Details</f:facet>
-                        <h:form prependId="false">
-                            <h:commandButton value="Details" action="#{homeController.toDetailPage(book)}"/>
-                        </h:form>
+                        <h:commandButton id="detailBtn_#{book.getId}"
+                                         value="Details"
+                                         action="#{homeController.toDetailPage(book)}"/>
                     </h:column>
                 </sec:authenticated>
 

@@ -34,8 +34,8 @@ public class BookServiceTest extends ServiceTestBase {
 
     private String createUser() {
         String userEmail = "TEST_EMAIL@EMAIL.COM";
-        userService.createUser("TEST_NAME", "TEST_SURNAME", "TEST_PASSWORD", userEmail);
-        return (userEmail);
+        userService.createUser(userEmail, "TEST_SURNAME", "TEST_PASSWORD", "TEST_NAME");
+        return userEmail;
     }
 
     @Test

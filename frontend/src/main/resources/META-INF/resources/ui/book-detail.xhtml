@@ -33,6 +33,9 @@
                 </ul>
                 <h:outputLabel value="#{homeController.book.course}" />
                 <h5>Sellers</h5>
+
+
+                <!--TODO add check if seller name is user.-->
                 <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="booksTable" >
                     <h:column>
                         <f:facet name="header">Seller</f:facet>

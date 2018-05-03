@@ -15,13 +15,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-
-
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
 
+    public List<Book> getAllBooksWithSellers() {
+        return bookService.getAllBooksWithSellers();
+    }
 
 
 
