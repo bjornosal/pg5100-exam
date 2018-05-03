@@ -20,7 +20,7 @@
         <sec:authenticated>
             <h:outputText value="Welcome to Used Books Corp #{userInfoController.fullNameOfCurrentUser}!"/>
 
-            <h:form prependId="false" rendered="#{homeController.book.sellers.size() gt '0'}">
+            <h:form prependId="false">
 
 
 
@@ -44,31 +44,39 @@
 
                 <!--TODO add check if seller name is user.-->
                 <!--TODO check if seller is logged in-->
-                <h:outputLabel>Sellers</h:outputLabel>
+                <h3><h:outputLabel rendered="#{!detailController.sellerOnlyCurrentUser}">Sellers</h:outputLabel></h3>
 
-                <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable">
+                <!--TODO possible new query to get sellers without current seller-->
+                <h:dataTable value="#{homeController.book.sellers}" var="seller" border="1" id="sellerTable"
+                             rendered="#{homeController.book.sellers.size() ne 0 and !detailController.sellerOnlyCurrentUser}">
 
                     <h:column>
                         <f:facet name="header">Seller</f:facet>
-                        <h:outputLabel value="#{userInfoController.getFullNameByEmail(seller.email)}" class="sellerName"/>
+                        <h:outputLabel rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
+                                       value="#{userInfoController.getFullNameByEmail(seller.email)}"
+                                       class="sellerName"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:inputTextarea value="#{messageController.messageForm[seller.email]}"
+                        <h:inputTextarea rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
+                                         value="#{messageController.messageForm[seller.email]}"
                                          id="checkBox_#{seller.email}"
                                          class="messageTo_#{seller.email}" />
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Send Message</f:facet>
-                        <h:commandButton value="Send Message!" id="sendBtnId" action="#{messageController.sendMessage(seller.email)}"/>
+                        <h:commandButton rendered="#{!detailController.sellerIsCurrentUser(seller.email)}"
+                                         value="Send Message!"
+                                         id="sendBtnId"
+                                         action="#{messageController.sendMessage(seller.email)}"/>
                     </h:column>
                 </h:dataTable>
             </h:form>
 
             <h3><h:outputLabel prependId="false" rendered="#{homeController.book.sellers.size() eq  0}" value="No books for sale."/></h3>
-
+            <h3><h:outputLabel rendered="#{detailController.sellerOnlyCurrentUser}" value="Only you selling."/> </h3>
         </sec:authenticated>
 
         <sec:anonymous>

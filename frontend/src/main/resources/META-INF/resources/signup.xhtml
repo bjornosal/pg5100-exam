@@ -14,8 +14,8 @@
     <ui:define name="content">
 
         <h:form prependId="false">
-            <h:outputLabel value="Fill in all fields. &lt;br/&gt; Email has to be a valid email."
-                           rendered="${!empty param['error']}" escape="false"/>
+            <h4><h:outputLabel value="Make sure you fill in all fields. &lt;br/&gt; Email has to be a valid email. &lt;br/&gt; Example: mail@example.com"
+                           rendered="${!empty param['error']}" escape="false"/></h4>
 
             <div>
                 <h:outputText value="Name: "/>

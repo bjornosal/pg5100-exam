@@ -22,8 +22,6 @@ public class MessageController {
     @Autowired
     private UserInfoController userInfoController;
 
-    @Autowired
-    private HomeController homeController;
 
     private Map<String, String> messageForm = new HashMap<>();
 
@@ -46,14 +44,7 @@ public class MessageController {
         return userService.getReceivedMessages(userInfoController.getUserName());
     }
 
-    public boolean isSellerNotCurrentUser(String email){
-        return !userInfoController.getUserName().equalsIgnoreCase(email);
-    }
 
-    public boolean isSellerOnlyCurrentUser() {
-        return (homeController.getBook().getSellers().size() == 1)
-                && homeController.getBook().getSellers().get(0).getEmail().equalsIgnoreCase(userInfoController.getUserName());
-    }
 
     public Map<String, String> getMessageForm() {
         return messageForm;
