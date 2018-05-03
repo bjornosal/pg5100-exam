@@ -28,9 +28,6 @@ public class BookService {
         return book.getId();
     }
 
-    /*
-    Assuming I will have access to a book when deleting. (Admin?)
-     */
     public void deleteBook(@NotNull Long bookId) {
         em.remove(em.find(Book.class, bookId));
     }

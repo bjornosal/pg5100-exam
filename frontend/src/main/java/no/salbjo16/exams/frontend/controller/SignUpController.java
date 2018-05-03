@@ -39,7 +39,6 @@ public class SignUpController {
             //nothing to do
         }
 
-
         if(registered){
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);

@@ -1,0 +1,43 @@
+Solution for Used Books Web App
+
+The solution is re-using a lot of the classes from the course.
+Such as:
+- WebSecurityConfig.
+- RedirectForwardHandler
+- SeleniumDriverHandler
+- SeleniumDriverHandler
+- SeleniumTestBase.
+- LocalApplicationRunner.
+- PageObject
+
+- Uncertainties
+
+I had to do a minor configuration on WebSecurityConfig to be able to redirect the user
+to the book-detail.jsf page, from localhost:8080, which was not possible without adding "/*".
+The user would then be redirected to login instead. The user would be able to go there
+if (s)he was at localhost:8080/index.jsf or any other link.
+
+I was unsure if a checkbox was desired for the exam, as you say mark. You did not mention if
+it was a checkbox. I wanted to use a button for the case, but I kept a checkbox which will change with
+the button as well. It will also give the user a visual feedback on if they have marked it as for sale.
+
+I decided to make my HomeController ApplicationScoped, as to me, it made sense for the application.
+If it was SessionScoped it would not be able to live forever, as the ApplicationScoped makes sure of.
+
+- Backend
+-- Entities
+
+- Book
+I keep a list of sellers per book, as a user does not need to say they have a book.
+- Message
+I keep information regarding the sender and receiver on the message itself.
+- User
+A user will keep information on which messages they have sent and received.
+
+-- Services
+
+- DefaultDataInitializerService
+I am using the same concept as in the course. I attempted to set up a create script with flyway,
+but I was unable to do so and decided this was the easiest solution for this task.
+
+

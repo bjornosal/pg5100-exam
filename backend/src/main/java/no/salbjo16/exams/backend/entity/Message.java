@@ -9,10 +9,6 @@ import javax.validation.constraints.Size;
 @Entity
 public class Message {
 
-    //TODO Consider adding a book id to have a clue of which book the message is for?
-    //TODO add date for each message to sort chronologically?? or can be done otherwise?
-
-
     @GeneratedValue @Id
     private Long id;
 

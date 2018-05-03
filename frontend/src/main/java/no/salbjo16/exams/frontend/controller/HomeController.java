@@ -4,7 +4,7 @@ import no.salbjo16.exams.backend.entity.Book;
 import no.salbjo16.exams.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class HomeController implements Serializable{
 
     @Autowired
@@ -83,7 +83,7 @@ public class HomeController implements Serializable{
     public String toDetailPage(Book book) {
         this.book = book;
 
-        return "/book-detail.jsf&faces-redirect=true";
+        return "book-detail.jsf&faces-redirect=true";
     }
 
     public Book getBook() {

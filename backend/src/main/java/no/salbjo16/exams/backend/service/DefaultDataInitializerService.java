@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class DefaultDataInitializerService {
 
-    //TODO replace this with flyway
 
     @Autowired
     private BookService bookService;

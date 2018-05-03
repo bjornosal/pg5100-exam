@@ -22,7 +22,6 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     public boolean createUser(String email, String password, String name, String surname){
         String hashedPassword = passwordEncoder.encode(password);
 

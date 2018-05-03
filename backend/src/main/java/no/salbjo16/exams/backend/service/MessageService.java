@@ -17,7 +17,6 @@ public class MessageService {
     private EntityManager em;
 
     public Long sendMessage(String messageText, String senderEmail, String receiverEmail) {
-        //Sender will always exist as it is the logged in user.
         User sender = em.find(User.class, senderEmail);
         User recipient  = em.find(User.class, receiverEmail);
         if(recipient == null) {

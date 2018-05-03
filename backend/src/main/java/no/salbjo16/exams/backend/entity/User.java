@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -13,8 +14,6 @@ import java.util.Set;
 @Entity
 @Table(name="USERS")
 public class User {
-//TODO implement "Logged In"
-
 
     @Id
     @NotBlank
@@ -22,12 +21,15 @@ public class User {
     private String email;
 
     @NotBlank
+    @Size(min = 1, max = 1024)
     private String name;
 
     @NotBlank
+    @Size(min = 1, max = 1024)
     private String surname;
 
     @NotBlank
+    @Size(min = 5, max = 1024)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
