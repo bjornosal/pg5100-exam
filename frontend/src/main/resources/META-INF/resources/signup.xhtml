@@ -15,20 +15,27 @@
 
         <h:form prependId="false">
             <h4><h:outputLabel value="Make sure you fill in all fields. &lt;br/&gt; Email has to be a valid email. &lt;br/&gt; Example: mail@example.com"
-                           rendered="${!empty param['error']}" escape="false"/></h4>
+                               rendered="${!empty param['error']}" escape="false"/></h4>
 
-            <div>
-                <h:outputText value="Name: "/>
-                <h:inputText id="name" value="#{signUpController.name}" class="login"/><br/>
-                <h:outputText value="Surname: "/>
-                <h:inputText id="surname" value="#{signUpController.surname}" class="login"/><br/>
-                <h:outputText value="Email: "/>
-                <h:inputText id="email" value="#{signUpController.email}" class="login"/><br/>
-                <h:outputText value="Password: "/>
-                <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
-
-                <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="gameBtn"/>
-            </div>
+            <table class="formTable">
+                <tr>
+                    <td><h:outputText value="Name: "/></td>
+                    <td><h:inputText id="name" value="#{signUpController.name}" class="login"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Surname: "/></td>
+                    <td><h:inputText id="surname" value="#{signUpController.surname}" class="login"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Email: "/></td>
+                    <td><h:inputText id="email" value="#{signUpController.email}" class="login"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Password: "/></td>
+                    <td><h:inputSecret id="password" value="#{signUpController.password}" class="login"/></td>
+                </tr>
+            </table>
+            <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="defaultBtn"/>
         </h:form>
 
     </ui:define>

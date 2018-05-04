@@ -10,12 +10,10 @@
 <ui:composition template="/layout.xhtml">
 
     <ui:define name="title">
-        Registry
+        Admin - Registry
     </ui:define>
 
     <ui:define name="content">
-        <p>Admin Page</p>
-
         <h:form prependId="false">
             <h3>Add Book</h3>
             <h3><h:outputLabel value="Title/Course fields can not be empty."
@@ -23,16 +21,29 @@
 
             <h3><h:outputLabel value="Book added."
                                rendered="${!empty param['success']}"/></h3>
-            <h:outputText value="Title: "/>
-            <h:inputText id="addTitle" value="#{adminController.title}" class="addBook"/><br/>
-            <h:outputText value="Author(s): "/>
-            <h:inputText id="addAuthors" value="#{adminController.authorsString}" class="addBook"/><br/>
-            <h:outputText value="Separate authors with ','"/><br/>
-            <h:outputText value="Course: "/>
-            <h:inputText id="addCourse" value="#{adminController.course}" class="addBook"/><br/>
+
+            <table>
+                <tr>
+                    <td><h:outputText value="Title: "/></td>
+                    <td><h:inputText id="addTitle" value="#{adminController.title}" class="addBook"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Author(s): "/></td>
+                    <td><h:inputText id="addAuthors" value="#{adminController.authorsString}" class="addBook"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><h:outputText value="Separate authors with ','"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Course: "/></td>
+                    <td><h:inputText id="addCourse" value="#{adminController.course}" /></td>
+                </tr>
+            </table>
             <h:commandButton
                     value="Add Book"
                     id="addBtn"
+                    class="defaultBtn"
                     action="#{adminController.createBook}">
             </h:commandButton>
         </h:form>
@@ -66,6 +77,7 @@
                     <h:commandButton
                             onclick="return confirm('Do you want to delete #{book.title}?')"
                             value="Delete"
+                            class="defaultBtn"
                             action="#{adminController.deleteBook(book.id)}"
                             id="deleteBtn">
 

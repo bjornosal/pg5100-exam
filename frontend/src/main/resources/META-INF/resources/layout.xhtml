@@ -22,12 +22,8 @@
 
 
 <h:body>
-
-    <p>
-        Back to <a href="/index.jsf">Home</a>
-    </p>
+    <a href="/index.jsf" class="defaultBtn">Home</a>
     <hr/>
-
 
     <h1>
         <ui:insert name="title">Default title</ui:insert>
@@ -36,17 +32,20 @@
 
 
     <sec:authenticated>
-        <a id="logoutId" href="/logout" class="btn">Log Out</a>
-        <a id="messagesId" href="/ui/message.jsf" class="btn">Messages</a>
+        <div class="btnContainer">
+        <a id="logoutId" href="/logout" class="defaultBtn menuBtn">Log Out</a>
+        <a id="messagesId" href="/ui/message.jsf" class="defaultBtn menuBtn">Messages</a>
         <!--SOURCE: https://stackoverflow.com/questions/11469211/how-to-use-secauthorize-access-hasroleroles-for-checking-multiple-roles-->
-        <sec:authorize access="hasRole('ADMIN')"><a id="registryId" href="/admin/book-registry.jsf" class="btn">Registry</a></sec:authorize>
+        <sec:authorize access="hasRole('ADMIN')"><a id="registryId" href="/admin/book-registry.jsf" class="defaultBtn menuBtn">Registry</a></sec:authorize>
+        </div>
     </sec:authenticated>
 
     <sec:anonymous>
         <p>Please log in, or create a new user:</p>
-        <a id="linkToLoginId" href="login.jsf">Log in</a>
-        <a id="linkToSignUpId" href="signup.jsf">Sign up</a>
+        <a id="linkToLoginId" href="login.jsf" class="defaultBtn">Log in</a>
+        <a id="linkToSignUpId" href="signup.jsf" class="defaultBtn">Sign up</a>
     </sec:anonymous>
+    <hr/>
 
     <div class="content-container">
         <ui:insert name="content">Default content</ui:insert>

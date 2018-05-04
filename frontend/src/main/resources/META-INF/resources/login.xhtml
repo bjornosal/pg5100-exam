@@ -17,15 +17,18 @@
             <h:outputLabel value="Login failed: user and/or password are wrong."
                            rendered="${!empty param['error']}"/>
 
-            <div>
+            <table>
+                <tr>
+                    <td><h:outputText value="Email: "/></td>
+                    <td><h:inputText id="username" class="login"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Password: "/></td>
+                    <td><h:inputSecret id="password" class="login"/></td>
+                </tr>
+            </table>
+            <h:commandButton id="submit" class="defaultBtn" value="Log In"/>
 
-                <h:outputText value="Email: "/>
-                <h:inputText id="username" class="login"/><br/>
-                <h:outputText value="Password: "/>
-                <h:inputSecret id="password" class="login"/><br/>
-
-                <h:commandButton id="submit" value="Log In"/>
-            </div>
         </h:form>
 
     </ui:define>

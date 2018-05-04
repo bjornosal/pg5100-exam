@@ -23,7 +23,7 @@
         <h3>Books</h3>
 
         <h:form prependId="false">
-            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable">
+            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable" class="tableBook">
                 <h:column>
                     <f:facet name="header">Title</f:facet>
                     <h:outputLabel value="#{book.title}"
@@ -58,12 +58,13 @@
                         <h:selectBooleanCheckbox
                                 value="#{homeController.isUserSelling(book.id)}"
                                 id="checkBox"
-                                class="k#{book.id}"
+                                class="indexCheckbox"
                                 disabled="true"/>
                         <h:commandButton
                                 value="(Un)Mark Sell"
                                 action="#{homeController.markBook(book)}"
                                 id="sellBtn"
+                                class="detailBtn"
                         />
                     </h:column>
                 </sec:authenticated>
@@ -72,6 +73,7 @@
                     <f:facet name="header">Details</f:facet>
                     <h:commandButton id="detailBtn"
                                      value="Details"
+                                     class="detailBtn"
                                      action="#{homeController.toDetailPage(book)}"/>
                 </h:column>
 
