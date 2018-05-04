@@ -1,6 +1,5 @@
 package no.salbjo16.exams.selenium;
 
-import no.salbjo16.exams.backend.service.BookService;
 import no.salbjo16.exams.backend.service.UserService;
 import no.salbjo16.exams.selenium.po.BookDetailPO;
 import no.salbjo16.exams.selenium.po.IndexPO;
@@ -25,9 +24,6 @@ public abstract class SeleniumTestBase {
     protected abstract int getServerPort();
 
     private static final AtomicInteger counter = new AtomicInteger(0);
-
-    @Autowired
-    private BookService bookService;
 
     @Autowired
     private UserService userService;

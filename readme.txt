@@ -51,13 +51,16 @@ Including error messages to users if no books available instead of a table etc.
 All tests has been written as per description.
 All tests are located in SeleniumTestBase so that
 I can implement them with Docker at a later time.
-Could have been refactored a lot. TODO?
+Could have been refactored a lot.
 Code coverage of 91%.
 
 - Extra Functionality
 
+Added possibility of registring books from GUI, only for administrators.
+The Selenium test for it is called testAddBook() and can be found in SeleniumTestBase
 
-
+Added possibility of deleting books from GUI, only for administrators.
+The Selenium test for it is called testDeleteBook() and can be found in SeleniumTestBase
 
 
 - Source used multiple places:
