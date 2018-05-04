@@ -321,11 +321,7 @@ public abstract class SeleniumTestBase {
         String title = getUniqueId();
         String course = getUniqueId();
         registry.addBook(title, "TEST_BOOK_AUTHOR", course);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         assertEquals(amountOfBooks+1, registry.getAmountOfBooksDisplayed());
 
     }
@@ -351,5 +347,7 @@ public abstract class SeleniumTestBase {
         registry.deleteBook(registry.getRowToDeleteOn(title));
         assertEquals(amountOfBooks, registry.getAmountOfBooksDisplayed());
     }
+
+
 
 }

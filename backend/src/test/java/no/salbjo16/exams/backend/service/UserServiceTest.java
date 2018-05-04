@@ -61,14 +61,5 @@ public class UserServiceTest extends ServiceTestBase {
         assertEquals(amountOfUsers+1, userService.getAllUsers().size());
     }
 
-    @Test
-    public void testDeleteUser() {
-        int amountOfUsers = userService.getAllUsers().size();
-        userService.createUser("TEST_EMAIL@MAIL.COM", "PASSWORD", "NAME", "SURNAME");
-        assertEquals(amountOfUsers+1, userService.getAllUsers().size());
-        userService.deleteUser("TEST_EMAIL@MAIL.COM");
-        assertEquals(amountOfUsers, userService.getAllUsers().size());
-    }
-
 
 }
