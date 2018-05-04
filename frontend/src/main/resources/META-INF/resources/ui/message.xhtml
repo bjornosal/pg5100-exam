@@ -21,7 +21,7 @@
 
             <h:form prependId="false" rendered="#{messageController.sentMessages.size() ne 0}">
                 <h4><h:outputLabel value="Sent Messages"/></h4>
-                <h:dataTable value="#{messageController.sentMessages}" var="sentMessage" border="1" id="sentMessagesTable" class="tableBook">
+                <h:dataTable value="#{messageController.sentMessages}" var="sentMessage" border="1" id="sentMessagesTable" class="tableBook sentTable">
                     <h:column>
                         <f:facet name="header">Recipient</f:facet>
                         <h:outputLabel value="#{sentMessage.recipient.name} #{sentMessage.recipient.surname}"
@@ -50,7 +50,7 @@
 
             <h:form prependId="false" rendered="#{messageController.receivedMessages.size() gt '0'}">
                 <h4><h:outputLabel value="Received Messages"/></h4>
-                <h:dataTable value="#{messageController.receivedMessages}" var="receivedMessage" border="1" id="receivedMessagesTable" class="tableBook">
+                <h:dataTable value="#{messageController.receivedMessages}" var="receivedMessage" border="1" id="receivedMessagesTable" class="tableBook receivedTable">
                     <h:column>
                         <f:facet name="header">From</f:facet>
                         <h:outputLabel value="#{receivedMessage.sender.name} #{receivedMessage.sender.surname}"
@@ -81,7 +81,7 @@
                 </h:dataTable>
             </h:form>
 
-            <h:form prependId="false" rendered="#{messageController.receivedMessages.size() eq  0}">
+            <h:form prependId="false" rendered="#{messageController.sentMessages.size() eq  0}">
                 <h3>No sent messages.</h3>
             </h:form>
         </sec:authenticated>

@@ -132,7 +132,7 @@ public abstract class SeleniumTestBase {
         assertTrue(home.isSellButtonDisplayed(ROW_TO_TEST));
 
         //checking other books
-        for(int i = 1; i < bookService.getAllBooks().size(); i++) {
+        for(int i = 1; i < home.getAmountOfBooks(); i++) {
             assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW, home.getSellersForBookOnRow(ROW_TO_TEST));
         }
 
@@ -142,7 +142,7 @@ public abstract class SeleniumTestBase {
         //UP to one
         assertEquals(ORIGINAL_AMOUNT_OF_BOOKS_FOR_SALE_ON_TEST_ROW+1, home.getSellersForBookOnRow(ROW_TO_TEST));
 
-        for(int i = 1; i < bookService.getAllBooks().size(); i++) {
+        for(int i = 1; i < home.getAmountOfBooks(); i++) {
             assertEquals(0, home.getSellersForBookOnRow(BOOKS_TABLE+i+":"));
         }
 
@@ -260,7 +260,7 @@ public abstract class SeleniumTestBase {
 
 
         //checks that message is sent.
-        for (int i = 0; i < userService.getSentMessages(emailTwo).size(); i++) {
+        for (int i = 0; i < message.getAmountOfSentMessages(); i++) {
 
             if (message.findSentMessageWithText(i, messageText))
                 foundMessage = true;
@@ -276,7 +276,7 @@ public abstract class SeleniumTestBase {
         foundMessage = false;
         //Checks that message is received.
         int rowOfMessage = -1;
-        for (int i = 0; i < userService.getReceivedMessages(emailOne).size(); i++) {
+        for (int i = 0; i < message.getAmountOfReceivedMessages(); i++) {
 
             if (message.findReceivedMessageWithText(i, messageText)) {
                 foundMessage = true;
@@ -294,7 +294,7 @@ public abstract class SeleniumTestBase {
         message = home.toMessages();
 
         foundMessage = false;
-        for (int i = 0; i < userService.getSentMessages(emailTwo).size(); i++) {
+        for (int i = 0; i < message.getAmountOfSentMessages(); i++) {
 
             if (message.findSentMessageWithText(i, messageText))
                 foundMessage = true;
@@ -302,7 +302,7 @@ public abstract class SeleniumTestBase {
         assertTrue(foundMessage);
 
         foundMessage = false;
-        for (int i = 0; i < userService.getReceivedMessages(emailTwo).size(); i++) {
+        for (int i = 0; i < message.getAmountOfReceivedMessages(); i++) {
 
             if (message.findReceivedMessageWithText(i, replyText))
                 foundMessage = true;
@@ -320,14 +320,13 @@ public abstract class SeleniumTestBase {
         home.doLogin(email, "password");
         assertTrue(home.isLoggedIn());
         registry = home.toBookRegistry();
-        int amountOfBooks = bookService.getAllBooks().size();
+        int amountOfBooks = registry.getAmountOfBooksDisplayed();
 
         String title = getUniqueId();
         String course = getUniqueId();
         registry.addBook(title, "TEST_BOOK_AUTHOR", course);
-        assertEquals(amountOfBooks+1, bookService.getAllBooks().size());
+        assertEquals(amountOfBooks+1, registry.getAmountOfBooksDisplayed());
 
-        //TODO check if user is logged out and books persist? maybe
     }
 
     @Test
@@ -339,24 +338,17 @@ public abstract class SeleniumTestBase {
         home.doLogin(email, "password");
         assertTrue(home.isLoggedIn());
         registry = home.toBookRegistry();
-        int amountOfBooks = bookService.getAllBooks().size();
+        int amountOfBooks = registry.getAmountOfBooksDisplayed();
 
         String title = getUniqueId();
         String course = getUniqueId();
 
         registry.addBook(title, "TEST_BOOK_AUTHOR", course);
-        assertEquals(amountOfBooks+1, bookService.getAllBooks().size());
+        assertEquals(amountOfBooks+1, registry.getAmountOfBooksDisplayed());
 
-        int rowToDeleteOn = -1;
-        for(int i = 0; i < bookService.getAllBooks().size(); i++) {
-            if(bookService.getAllBooks().get(i).getTitle().equalsIgnoreCase(title)) {
-                rowToDeleteOn = i;
-            }
-        }
-
-        assertNotEquals(-1, rowToDeleteOn);
-        registry.deleteBook(rowToDeleteOn);
-        assertEquals(amountOfBooks, bookService.getAllBooks().size());
+        assertNotEquals(-1, registry.getRowToDeleteOn(title));
+        registry.deleteBook(registry.getRowToDeleteOn(title));
+        assertEquals(amountOfBooks, registry.getAmountOfBooksDisplayed());
     }
 
 }

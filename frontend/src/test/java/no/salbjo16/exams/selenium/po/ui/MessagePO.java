@@ -4,6 +4,9 @@ import no.salbjo16.exams.selenium.PageObject;
 import no.salbjo16.exams.selenium.po.LayoutPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 
 public class MessagePO extends LayoutPO {
@@ -35,5 +38,17 @@ public class MessagePO extends LayoutPO {
 
     public void sendReplyMessage(int row) {
         clickAndWait("receivedMessagesTable:"+row+":sendReplyBtnId");
+    }
+
+    public int getAmountOfSentMessages() {
+        List<WebElement> elements = driver.findElements(
+                By.xpath("//table[@id='sentMessagesTable']/tbody/tr"));
+        return elements.size();
+    }
+
+    public int getAmountOfReceivedMessages() {
+        List<WebElement> elements = driver.findElements(
+                By.xpath("//table[@id='receivedMessagesTable']/tbody/tr"));
+        return elements.size();
     }
 }

@@ -50,7 +50,7 @@
 
         <h:form prependId="false">
             <h3>Book Registry</h3>
-            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable">
+            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable" class="bookRegistry">
                 <h:column>
                     <f:facet name="header">Title</f:facet>
                     <h:outputLabel value="#{book.title}"

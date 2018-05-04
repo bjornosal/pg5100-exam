@@ -4,6 +4,9 @@ import no.salbjo16.exams.selenium.PageObject;
 import no.salbjo16.exams.selenium.po.admin.BookRegistryPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -70,6 +73,12 @@ public class IndexPO extends LayoutPO {
 
         assertTrue(po.isOnPage());
         return po;
+    }
+
+    public int getAmountOfBooks() {
+        List<WebElement> elements = driver.findElements(
+                By.xpath("//table[@id='booksTable']/tbody/tr"));
+        return elements.size();
     }
 
 }
