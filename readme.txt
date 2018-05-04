@@ -1,5 +1,9 @@
 Solution for Used Books Web App
 
+I created an admin (see extra functionality) user for easy testing for your sake.
+E-mail: admin@book.com
+Password: admin
+
 The solution is re-using a lot of the classes from the course.
 Such as:
 - WebSecurityConfig.
@@ -56,12 +60,16 @@ Code coverage of 91%.
 
 - Extra Functionality
 
-Added possibility of registring books from GUI, only for administrators.
+Added possibility of creating an admin user. Method is called createAdmin and can be found in
+UserService. The unit test can be found in UserServiceTest.
+
+Added possibility of registering books from GUI, only for administrators.
 The Selenium test for it is called testAddBook() and can be found in SeleniumTestBase
 
 Added possibility of deleting books from GUI, only for administrators.
 The Selenium test for it is called testDeleteBook() and can be found in SeleniumTestBase
 
+Added some general CSS to make it look nicer (I realise I'm not a designer now).
 
 - Source used multiple places:
 https://www.tutorialspoint.com/jsf/jsf_edit_datatable.htm
