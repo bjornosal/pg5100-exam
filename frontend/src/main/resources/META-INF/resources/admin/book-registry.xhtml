@@ -50,7 +50,7 @@
 
         <h:form prependId="false">
             <h3>Book Registry</h3>
-            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable" class="bookRegistry">
+            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable" class="bookRegistry tableBook">
                 <h:column>
                     <f:facet name="header">Title</f:facet>
                     <h:outputLabel value="#{book.title}"
@@ -77,7 +77,7 @@
                     <h:commandButton
                             onclick="return confirm('Do you want to delete #{book.title}?')"
                             value="Delete"
-                            class="defaultBtn"
+                            class="detailBtn"
                             action="#{adminController.deleteBook(book.id)}"
                             id="deleteBtn">
 

@@ -1,6 +1,9 @@
 Solution for Used Books Web App
 
 I created an admin (see extra functionality) user for easy testing for your sake.
+
+Application is live (see extra functionality)
+
 E-mail: admin@book.com
 Password: admin
 
@@ -70,6 +73,9 @@ Added possibility of deleting books from GUI, only for administrators.
 The Selenium test for it is called testDeleteBook() and can be found in SeleniumTestBase
 
 Added some general CSS to make it look nicer (I realise I'm not a designer now).
+
+Deployed application to Heroku, is fully operational on:
+https://pg5100-704148.herokuapp.com
 
 - Source used multiple places:
 https://www.tutorialspoint.com/jsf/jsf_edit_datatable.htm

@@ -81,8 +81,8 @@
                 </h:dataTable>
             </h:form>
 
-            <h:form prependId="false" rendered="#{messageController.sentMessages.size() eq  0}">
-                <h3>No sent messages.</h3>
+            <h:form prependId="false" rendered="#{messageController.receivedMessages.size() eq  0}">
+                <h3>No received messages.</h3>
             </h:form>
         </sec:authenticated>
 

@@ -75,17 +75,17 @@
             </plugin>
             <!--TODO ADD HEROKU FILE LOCATION ETC-->
 
-            <!--           <plugin>
-                          <groupId>com.heroku.sdk</groupId>
-                          <artifactId>heroku-maven-plugin</artifactId>
-                          <version>2.0.2</version>
-                          <configuration>
-                              <appName>salbjo16-pg5100-exam</appName>
-                              <processTypes>
-                                  <web>java -Dserver.port=$PORT -jar target/quizgame-exec.jar</web>
-                              </processTypes>
-                          </configuration>
-                      </plugin>-->
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <appName>pg5100-704148</appName>
+                    <processTypes>
+                        <web>java -Dserver.port=$PORT -jar target/salbjo16-exam-exec.jar</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
 
         </plugins>
         <!--Version management of plugins-->
