@@ -28,5 +28,17 @@ public class UsersPO extends LayoutPO {
         return elements.size();
     }
 
+    public int getRowOfUser(String email) {
+        List<WebElement> elements = driver.findElements(
+                By.xpath("//table[@id='userTable']/tbody/tr"));
+        for(int i = 0; i < elements.size(); i++) {
+            if(elements.get(i).getText().contains(email)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 
 }

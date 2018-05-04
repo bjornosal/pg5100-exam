@@ -61,5 +61,4 @@ public class UserServiceTest extends ServiceTestBase {
         assertEquals(amountOfUsers+1, userService.getAllUsers().size());
     }
 
-
 }

@@ -56,17 +56,24 @@
                                    id="enabled"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Delete User</f:facet>
+                    <f:facet name="header">Enable/Disable</f:facet>
                     <!--Source for alert dialog: https://stackoverflow.com/questions/19362983/how-to-add-confirmation-dialog-->
                     <h:commandButton
-                            rendered="#{!user.roles.contains('ROLE_ADMIN')}"
-                            onclick="return confirm('Do you want to delete #{book.title}?')"
-                            value="Delete"
+                            rendered="#{!user.roles.contains('ROLE_ADMIN') and user.enabled}"
+                            onclick="return confirm('Do you want to disable user?')"
+                            value="Disable"
                             class="detailBtn"
-                            action="#{usersController.deleteUser(user.email)}"
-                            id="deleteBtn">
+                            action="#{usersController.disableUser(user.email)}"
+                            id="disableBtn"/>
 
-                    </h:commandButton>
+                    <h:commandButton
+                            rendered="#{!user.roles.contains('ROLE_ADMIN') and !user.enabled}"
+                            onclick="return confirm('Do you want to enable user?')"
+                            value="Enable"
+                            class="detailBtn"
+                            action="#{usersController.disableUser(user.email)}"
+                            id="enableBtn"/>
+
                 </h:column>
             </h:dataTable>
         </h:form>

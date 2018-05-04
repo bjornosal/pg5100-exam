@@ -27,8 +27,8 @@ public class UsersController {
         return userService.getAllUsers();
     }
 
-    public void deleteUser(String email) {
-        userService.deleteUser(email);
+    public void disableUser(String email) {
+        userService.changeEnabled(email);
     }
 
     public String getEmail() {

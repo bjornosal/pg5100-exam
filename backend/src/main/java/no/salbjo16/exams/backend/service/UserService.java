@@ -87,4 +87,11 @@ public class UserService {
         return query.getResultList();
     }
 
+    public void changeEnabled(String email) {
+        User user = em.find(User.class, email);
+        user.setEnabled(!user.getEnabled());
+    }
+
+
+
 }
