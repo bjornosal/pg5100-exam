@@ -62,7 +62,7 @@ Could have been refactored a lot.
 Code coverage of 91%.
 
 - Extra Functionality
-
+-----
 Added possibility of creating an admin user. Method is called createAdmin and can be found in
 UserService. The unit test can be found in UserServiceTest.
 
@@ -76,7 +76,10 @@ Added some general CSS to make it look nicer (I realise I'm not a designer now).
 
 Deployed application to Heroku, is fully operational on:
 https://pg5100-704148.herokuapp.com
-
+------
+- Sources
 - Source used multiple places:
 https://www.tutorialspoint.com/jsf/jsf_edit_datatable.htm
 To place form outside of datatable to get it to work.
+https://stackoverflow.com/questions/35126293/how-to-set-text-into-textarea-with-selenium-webdriver
+- https://github.com/arcuri82/testing_security_development_enterprise_systems

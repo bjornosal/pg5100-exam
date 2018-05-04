@@ -41,13 +41,13 @@ public class BookRegistryPO extends LayoutPO {
 
     public int getAmountOfBooksDisplayed() {
         List<WebElement> elements = driver.findElements(
-                By.xpath("//table[@class='bookRegistry']/tbody/tr"));
+                By.xpath("//table[@id='booksTable']/tbody/tr"));
         return elements.size();
     }
 
     public int getRowToDeleteOn(String title) {
         List<WebElement> elements = driver.findElements(
-                By.xpath("//table[@class='bookRegistry']/tbody/tr"));
+                By.xpath("//table[@id='booksTable']/tbody/tr"));
 
         for(int i = 0; i < elements.size(); i++) {
             if(elements.get(i).getText().contains(title)){
