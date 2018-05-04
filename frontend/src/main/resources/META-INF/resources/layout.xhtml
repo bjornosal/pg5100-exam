@@ -38,6 +38,8 @@
     <sec:authenticated>
         <a id="logoutId" href="/logout" class="btn">Log Out</a>
         <a id="messagesId" href="/ui/message.jsf" class="btn">Messages</a>
+        <!--SOURCE: https://stackoverflow.com/questions/11469211/how-to-use-secauthorize-access-hasroleroles-for-checking-multiple-roles-->
+        <sec:authorize access="hasRole('ADMIN')"><a id="registryId" href="/admin/book-registry.jsf" class="btn">Registry</a></sec:authorize>
     </sec:authenticated>
 
     <sec:anonymous>

@@ -33,7 +33,6 @@ public class BookService {
     }
 
     public boolean addUserAsSeller(String userMail, Long bookId) {
-        //Assuming sellers can not have more than one copy of a book
         Book book = em.find(Book.class, bookId);
         User user = em.find(User.class, userMail);
         if (book.getSellers().contains(user)) {

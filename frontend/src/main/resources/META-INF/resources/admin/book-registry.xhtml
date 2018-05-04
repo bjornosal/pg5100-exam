@@ -14,8 +14,65 @@
     </ui:define>
 
     <ui:define name="content">
-        <h2>Used Books</h2>
         <p>Admin Page</p>
+
+        <h:form prependId="false">
+            <h3>Add Book</h3>
+            <h3><h:outputLabel value="Title/Course fields can not be empty."
+                               rendered="${!empty param['error']}"/></h3>
+
+            <h3><h:outputLabel value="Book added."
+                               rendered="${!empty param['success']}"/></h3>
+            <h:outputText value="Title: "/>
+            <h:inputText id="addTitle" value="#{adminController.title}" class="addBook"/><br/>
+            <h:outputText value="Author(s): "/>
+            <h:inputText id="addAuthors" value="#{adminController.authorsString}" class="addBook"/><br/>
+            <h:outputText value="Separate authors with ','"/><br/>
+            <h:outputText value="Course: "/>
+            <h:inputText id="addCourse" value="#{adminController.course}" class="addBook"/><br/>
+            <h:commandButton
+                    value="Add Book"
+                    id="addBtn"
+                    action="#{adminController.createBook}">
+            </h:commandButton>
+        </h:form>
+
+        <h:form prependId="false">
+            <h3>Book Registry</h3>
+            <h:dataTable value="#{bookController.allBooks}" var="book" border="1" id="booksTable">
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputLabel value="#{book.title}"
+                                   class="bookTitle"
+                                   id="title"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Author(s)</f:facet>
+                    <h:outputLabel value="#{book.authors}"
+                                   class="bookAuthors"
+                                   id="authors"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Course</f:facet>
+                    <h:outputLabel value="#{book.course}"
+                                   class="bookCourse"
+                                   id="course"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sell</f:facet>
+                    <!--Source for alert dialog: https://stackoverflow.com/questions/19362983/how-to-add-confirmation-dialog-->
+                    <h:commandButton
+                            onclick="return confirm('Do you want to delete #{book.title}?')"
+                            value="Delete"
+                            action="#{adminController.deleteBook(book.id)}"
+                            id="deleteBtn">
+
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
 
     </ui:define>
 

@@ -19,7 +19,6 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-
     public List<Book> getAllBooksWithSellers() {
         return bookService.getAllBooksWithSellers();
     }
