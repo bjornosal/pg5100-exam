@@ -86,4 +86,8 @@ public class UserService {
 
         return query.getResultList();
     }
+
+    public void deleteUser(String email) {
+        em.remove(em.find(User.class, email));
+    }
 }

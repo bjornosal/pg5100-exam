@@ -4,8 +4,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:sec="http://www.springframework.org/security/tags"
-      xmlns:f="http://java.sun.com/jsf/core"
->
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/layout.xhtml">
 
@@ -14,42 +13,58 @@
     </ui:define>
 
     <ui:define name="content">
+        <h3><h:outputLabel value="USER FIELDS."
+                           rendered="${!empty param['error']}"/></h3>
+
+        <h3><h:outputLabel value="DELETED."
+                           rendered="${!empty param['success']}"/></h3>
+
         <h:form prependId="false">
-            <h3>Add Book</h3>
-            <h3><h:outputLabel value="Title/Course fields can not be empty and must be unique."
-                               rendered="${!empty param['error']}"/></h3>
+            <h3>Users Registry</h3>
+            <h:dataTable value="#{usersController.allUsers}" var="user" border="1" id="userTable" class="userRegistry tableBook">
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:outputLabel value="#{user.email}"
+                                   class="userMail"
+                                   id="email"/>
+                </h:column>
 
-            <h3><h:outputLabel value="Book added."
-                               rendered="${!empty param['success']}"/></h3>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputLabel value="#{user.name}"
+                                   class="userName"
+                                   id="name"/>
+                </h:column>
 
-            <table>
-                <tr>
-                    <td><h:outputText value="Title: "/></td>
-                    <td><h:inputText id="addTitle" value="#{adminController.title}" class="addBook"/></td>
-                </tr>
-                <tr>
-                    <td><h:outputText value="Author(s): "/></td>
-                    <td><h:inputText id="addAuthors" value="#{adminController.authorsString}" class="addBook"/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><h:outputText value="Separate authors with ','"/></td>
-                </tr>
-                <tr>
-                    <td><h:outputText value="Course: "/></td>
-                    <td><h:inputText id="addCourse" value="#{adminController.course}" /></td>
-                </tr>
-            </table>
-            <h:commandButton
-                    value="Add Book"
-                    id="addBtn"
-                    class="defaultBtn"
-                    action="#{adminController.createBook}">
-            </h:commandButton>
+                <h:column>
+                    <f:facet name="header">Surname</f:facet>
+                    <h:outputLabel value="#{user.surname}"
+                                   class="userSurname"
+                                   id="surname"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Roles</f:facet>
+                    <h:outputLabel value="#{user.roles}"
+                                   class="userEnabled"
+                                   id="roles"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Enabled</f:facet>
+                    <h:outputLabel value="#{user.enabled}"
+                                   class="userEnabled"
+                                   id="enabled"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandButton value="Send Message!"
+                                     id="sendBtnId"
+                                     disabled="#{detailController.sellerIsCurrentUser(user.email)}"
+                                     action="#{usersController.sendMessage(seller.email)}"/>
+
+                </h:column>
+            </h:dataTable>
         </h:form>
-
-
-
     </ui:define>
 
 </ui:composition>
