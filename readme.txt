@@ -49,6 +49,8 @@ Including error messages to users if no books available instead of a table etc.
 
 - Frontend Testing (Selenium)
 All tests has been written as per description.
+All tests are located in SeleniumTestBase so that
+I can implement them with Docker at a later time.
 Could have been refactored a lot. TODO?
 Code coverage of 91%.
 

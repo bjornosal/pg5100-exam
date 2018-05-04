@@ -14,6 +14,9 @@ public class DefaultDataInitializerService {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private UserService userService;
+
     @PostConstruct
     public void initialize() {
         List<String> algorithmsAuthors = new ArrayList<>();
@@ -24,5 +27,7 @@ public class DefaultDataInitializerService {
 
         bookService.createBook("Algorithms", algorithmsAuthors,"Algorithms and Datastructures");
         bookService.createBook("Beginning Java EE 7", javaEEAuthors, "Enterprise Programming 1");
+
+        userService.createAdmin("admin@book.com", "admin", "Super", "User");
     }
 }

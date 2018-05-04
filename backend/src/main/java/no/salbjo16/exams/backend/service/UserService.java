@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -34,6 +33,27 @@ public class UserService {
 
         user.setPassword(hashedPassword);
         user.setRoles(Collections.singleton("USER"));
+        user.setEnabled(true);
+        user.setName(name);
+        user.setSurname(surname);
+        em.persist(user);
+
+        return true;
+    }
+
+    public boolean createAdmin(String email, String password, String name, String surname) {
+        String hashedPassword = passwordEncoder.encode(password);
+
+        if(em.find(User.class, email) != null) {
+            return false;
+        }
+
+        User user = new User();
+        user.setEmail(email);
+
+
+        user.setPassword(hashedPassword);
+        user.setRoles(Collections.singleton("ROLE_ADMIN"));
         user.setEnabled(true);
         user.setName(name);
         user.setSurname(surname);
