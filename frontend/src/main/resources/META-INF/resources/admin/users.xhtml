@@ -56,12 +56,17 @@
                                    id="enabled"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Delete</f:facet>
-                    <h:commandButton value="Send Message!"
-                                     id="sendBtnId"
-                                     disabled="#{detailController.sellerIsCurrentUser(user.email)}"
-                                     action="#{usersController.sendMessage(seller.email)}"/>
+                    <f:facet name="header">Delete User</f:facet>
+                    <!--Source for alert dialog: https://stackoverflow.com/questions/19362983/how-to-add-confirmation-dialog-->
+                    <h:commandButton
+                            rendered="#{!user.roles.contains('ROLE_ADMIN')}"
+                            onclick="return confirm('Do you want to delete #{book.title}?')"
+                            value="Delete"
+                            class="detailBtn"
+                            action="#{usersController.deleteUser(user.email)}"
+                            id="deleteBtn">
 
+                    </h:commandButton>
                 </h:column>
             </h:dataTable>
         </h:form>
