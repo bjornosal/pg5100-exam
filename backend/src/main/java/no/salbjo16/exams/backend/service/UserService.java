@@ -68,6 +68,11 @@ public class UserService {
         return name + " " + surname;
     }
 
+    public List<User> getAllUsers() {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+        return query.getResultList();
+    }
+
     public List<Message> getSentMessages(String email) {
         TypedQuery<Message> query = em.createQuery("SELECT m FROM Message m WHERE m.sender.email = ?1", Message.class);
         query.setParameter(1, email);

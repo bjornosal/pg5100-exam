@@ -51,8 +51,14 @@ public class UserServiceTest extends ServiceTestBase {
 
     @Test
     public void testCreateAdmin() {
-        assertTrue(userService.createUser("ADMIN_MAIL@TEST.COM", "PASSWORD","SURNAME", "NAME"));
+        assertTrue(userService.createAdmin("ADMIN_MAIL@TEST.COM", "PASSWORD","NAME", "SURNAME"));
+    }
 
+    @Test
+    public void testGetAllUsers() {
+        int amountOfUsers = userService.getAllUsers().size();
+        assertTrue(userService.createUser("TEST_MAIL@MAIL.COM", "PASSWORD", "NAME", "SURNAME"));
+        assertEquals(amountOfUsers+1, userService.getAllUsers().size());
     }
 
 
