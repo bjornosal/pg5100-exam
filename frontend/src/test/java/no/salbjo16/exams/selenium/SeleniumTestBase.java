@@ -5,6 +5,7 @@ import no.salbjo16.exams.backend.service.UserService;
 import no.salbjo16.exams.selenium.po.BookDetailPO;
 import no.salbjo16.exams.selenium.po.IndexPO;
 import no.salbjo16.exams.selenium.po.SignUpPO;
+import no.salbjo16.exams.selenium.po.admin.BookRegistryPO;
 import no.salbjo16.exams.selenium.po.ui.MessagePO;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +33,7 @@ public abstract class SeleniumTestBase {
     private UserService userService;
 
     private BookDetailPO detail;
+    private BookRegistryPO registry;
     private MessagePO message;
     private IndexPO home;
 
@@ -179,8 +181,6 @@ public abstract class SeleniumTestBase {
 
         boolean userOneIsMarkedAsSeller = false;
         for(int i = 0; i < sellers ; i++) {
-            System.out.println("sellerTable:"+i+":"+"sellerEmail");
-            System.out.println(emailOne);
             if(detail.getSeller("sellerTable:"+i+":").equalsIgnoreCase(emailOne)) {
                 userOneIsMarkedAsSeller = true;
             }
@@ -309,6 +309,54 @@ public abstract class SeleniumTestBase {
         }
 
         assertTrue(foundMessage);
+    }
+
+    @Test
+    public void testAddBook() {
+        String email = getUniqueId();
+        assertTrue(userService.createAdmin(email,"password","admin","admin"));
+        assertFalse(home.isLoggedIn());
+
+        home.doLogin(email, "password");
+        assertTrue(home.isLoggedIn());
+        registry = home.toBookRegistry();
+        int amountOfBooks = bookService.getAllBooks().size();
+
+        String title = getUniqueId();
+        String course = getUniqueId();
+        registry.addBook(title, "TEST_BOOK_AUTHOR", course);
+        assertEquals(amountOfBooks+1, bookService.getAllBooks().size());
+
+        //TODO check if user is logged out and books persist? maybe
+    }
+
+    @Test
+    public void testDeleteBook() {
+        String email = getUniqueId();
+        assertTrue(userService.createAdmin(email,"password","admin","admin"));
+        assertFalse(home.isLoggedIn());
+
+        home.doLogin(email, "password");
+        assertTrue(home.isLoggedIn());
+        registry = home.toBookRegistry();
+        int amountOfBooks = bookService.getAllBooks().size();
+
+        String title = getUniqueId();
+        String course = getUniqueId();
+
+        registry.addBook(title, "TEST_BOOK_AUTHOR", course);
+        assertEquals(amountOfBooks+1, bookService.getAllBooks().size());
+
+        int rowToDeleteOn = -1;
+        for(int i = 0; i < bookService.getAllBooks().size(); i++) {
+            if(bookService.getAllBooks().get(i).getTitle().equalsIgnoreCase(title)) {
+                rowToDeleteOn = i;
+            }
+        }
+
+        assertNotEquals(-1, rowToDeleteOn);
+        registry.deleteBook(rowToDeleteOn);
+        assertEquals(amountOfBooks, bookService.getAllBooks().size());
     }
 
 }

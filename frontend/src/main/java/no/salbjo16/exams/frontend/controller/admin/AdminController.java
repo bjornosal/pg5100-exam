@@ -1,5 +1,6 @@
 package no.salbjo16.exams.frontend.controller.admin;
 
+import no.salbjo16.exams.backend.entity.Book;
 import no.salbjo16.exams.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,8 +22,35 @@ public class AdminController {
     private String authorsString;
     private String course;
 
+    private boolean bookExists(String title) {
+        boolean exists = false;
+        for(Book book: bookService.getAllBooks()) {
+            if(book.getTitle().equalsIgnoreCase(title)) {
+                exists = true;
+            }
+        }
+
+        return exists;
+    }
+
+    private boolean courseExists(String course) {
+        boolean exists = false;
+        for(Book book: bookService.getAllBooks()) {
+            if(book.getCourse().equalsIgnoreCase(course)) {
+                exists = true;
+            }
+        }
+
+        return exists;
+    }
+
     public String createBook() {
-        if(title.isEmpty() || !(title.trim().length() > 0) || course.isEmpty() || !(title.trim().length() > 0))
+        if(title.isEmpty() ||
+                !(title.trim().length() > 0) ||
+                course.isEmpty() ||
+                !(title.trim().length() > 0) ||
+                bookExists(title) ||
+                courseExists(course))
             return "/admin/book-registry.jsf?faces-redirect=true&error=true";
 
         authors = new ArrayList<>(Arrays.asList(authorsString.split(",")));

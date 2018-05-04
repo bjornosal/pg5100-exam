@@ -47,7 +47,13 @@ public class UserServiceTest extends ServiceTestBase {
         createUsersAndSendMessage();
 
         assertEquals(1,userService.getSentMessages(userOneEmail).size());
+    }
+
+    @Test
+    public void testCreateAdmin() {
+        assertTrue(userService.createUser("ADMIN_MAIL@TEST.COM", "PASSWORD","SURNAME", "NAME"));
 
     }
+
 
 }

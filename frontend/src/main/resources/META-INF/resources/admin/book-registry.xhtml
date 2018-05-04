@@ -16,7 +16,7 @@
     <ui:define name="content">
         <h:form prependId="false">
             <h3>Add Book</h3>
-            <h3><h:outputLabel value="Title/Course fields can not be empty."
+            <h3><h:outputLabel value="Title/Course fields can not be empty and must be unique."
                                rendered="${!empty param['error']}"/></h3>
 
             <h3><h:outputLabel value="Book added."

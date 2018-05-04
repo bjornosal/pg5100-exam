@@ -1,6 +1,7 @@
 package no.salbjo16.exams.selenium.po;
 
 import no.salbjo16.exams.selenium.PageObject;
+import no.salbjo16.exams.selenium.po.admin.BookRegistryPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -47,7 +48,6 @@ public class IndexPO extends LayoutPO {
     public long getSellersForBookOnRow(String row) {
         String sellers = getDriver().findElement(By.id(row+"seller")).getText();
         return Long.parseLong(sellers);
-
     }
 
     public void clickToSellBook(String row) {
@@ -58,6 +58,15 @@ public class IndexPO extends LayoutPO {
         clickAndWait(row+"detailBtn");
 
         BookDetailPO po = new BookDetailPO(this);
+
+        assertTrue(po.isOnPage());
+        return po;
+    }
+
+    public BookRegistryPO toBookRegistry() {
+        clickAndWait("registryId");
+
+        BookRegistryPO po = new BookRegistryPO(this);
 
         assertTrue(po.isOnPage());
         return po;

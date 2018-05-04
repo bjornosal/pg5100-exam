@@ -24,7 +24,6 @@ public class BookDetailPO extends LayoutPO {
     }
 
     public String getSeller(String row) {
-        System.out.println("SELLER EMAIL: "+getDriver().findElement(By.id(row+"sellerEmail")).getText());
         return getDriver().findElement(By.id(row+"sellerEmail")).getText();
     }
     public void sendMessageToSellerOnRow(String row, String message) {
