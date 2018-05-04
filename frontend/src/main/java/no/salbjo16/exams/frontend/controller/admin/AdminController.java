@@ -71,14 +71,6 @@ public class AdminController {
         this.title = title;
     }
 
-    public List<String> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<String> authors) {
-        this.authors = authors;
-    }
-
     public String getCourse() {
         return course;
     }

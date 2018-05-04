@@ -63,7 +63,7 @@
                             onclick="return confirm('Do you want to disable user?')"
                             value="Disable"
                             class="detailBtn"
-                            action="#{usersController.disableUser(user.email)}"
+                            action="#{usersController.changeEnabled(user.email)}"
                             id="disableBtn"/>
 
                     <h:commandButton
@@ -71,7 +71,7 @@
                             onclick="return confirm('Do you want to enable user?')"
                             value="Enable"
                             class="detailBtn"
-                            action="#{usersController.disableUser(user.email)}"
+                            action="#{usersController.changeEnabled(user.email)}"
                             id="enableBtn"/>
 
                 </h:column>

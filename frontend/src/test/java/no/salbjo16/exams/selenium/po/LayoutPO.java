@@ -42,6 +42,7 @@ public abstract class LayoutPO extends PageObject {
         setText("username", email);
         setText("password", password);
         clickAndWait("submit");
+
         assertTrue(po.isOnPage());
 
         return po;
@@ -54,6 +55,22 @@ public abstract class LayoutPO extends PageObject {
         MessagePO messagePO = new MessagePO(this);
         assertTrue(messagePO.isOnPage());
         return messagePO;
+    }
+
+    public IndexPO doLoginWithDisabledUser(String email, String password) {
+        clickAndWait("linkToLoginId");
+        IndexPO po = new IndexPO(this);
+
+        setText("username", email);
+        setText("password", password);
+        clickAndWait("submit");
+
+//Ignoring this line as it will not work with a disabled user.
+//      assertTrue(po.isOnPage());
+
+        return po;
+
+
     }
 
     public boolean isLoggedIn(){

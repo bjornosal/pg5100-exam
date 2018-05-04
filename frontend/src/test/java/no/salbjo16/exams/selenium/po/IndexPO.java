@@ -1,7 +1,9 @@
 package no.salbjo16.exams.selenium.po;
 
+import no.salbjo16.exams.backend.entity.User;
 import no.salbjo16.exams.selenium.PageObject;
 import no.salbjo16.exams.selenium.po.admin.BookRegistryPO;
+import no.salbjo16.exams.selenium.po.admin.UsersPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,6 +72,14 @@ public class IndexPO extends LayoutPO {
         clickAndWait("registryId");
 
         BookRegistryPO po = new BookRegistryPO(this);
+
+        assertTrue(po.isOnPage());
+        return po;
+    }
+
+    public UsersPO toUsers() {
+        clickAndWait("usersId");
+        UsersPO po = new UsersPO(this);
 
         assertTrue(po.isOnPage());
         return po;

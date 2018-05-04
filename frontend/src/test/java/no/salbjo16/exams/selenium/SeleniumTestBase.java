@@ -5,6 +5,7 @@ import no.salbjo16.exams.selenium.po.BookDetailPO;
 import no.salbjo16.exams.selenium.po.IndexPO;
 import no.salbjo16.exams.selenium.po.SignUpPO;
 import no.salbjo16.exams.selenium.po.admin.BookRegistryPO;
+import no.salbjo16.exams.selenium.po.admin.UsersPO;
 import no.salbjo16.exams.selenium.po.ui.MessagePO;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public abstract class SeleniumTestBase {
     private BookDetailPO detail;
     private BookRegistryPO registry;
     private MessagePO message;
+    private UsersPO users;
     private IndexPO home;
 
     private final String BOOKS_TABLE = "booksTable:";
@@ -346,6 +348,40 @@ public abstract class SeleniumTestBase {
         assertNotEquals(-1, registry.getRowToDeleteOn(title));
         registry.deleteBook(registry.getRowToDeleteOn(title));
         assertEquals(amountOfBooks, registry.getAmountOfBooksDisplayed());
+    }
+
+    @Test
+    public void testDisableAndEnableUser() {
+        String user = getUniqueId();
+        String admin = getUniqueId();
+
+        assertTrue(userService.createUser(user,"password","admin","admin"));
+        assertTrue(userService.createAdmin(admin,"password","admin","admin"));
+
+        assertFalse(home.isLoggedIn());
+        home.doLogin(admin, "password");
+        assertTrue(home.isLoggedIn());
+        users = home.toUsers();
+
+        int amountOfUsers = users.getAmountOfUsers();
+        users.disableUser(user);
+        //Make sure it's not deleted.
+        assertEquals(amountOfUsers, users.getAmountOfUsers());
+        home.doLogout();
+        assertFalse(home.isLoggedIn());
+
+        //Attempt to log in with disabled user.
+        home.doLoginWithDisabledUser(user, "password");
+        assertFalse(home.isLoggedIn());
+
+        home.doLogin(admin, "password");
+        assertTrue(home.isLoggedIn());
+        users = home.toUsers();
+        assertEquals(amountOfUsers, users.getAmountOfUsers());
+        users.enableUser(user);
+        home.doLogout();
+
+        home.doLogin(user, "password");
     }
 
 

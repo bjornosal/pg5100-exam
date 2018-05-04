@@ -22,13 +22,14 @@ public class UsersPO extends LayoutPO {
         return getDriver().getTitle().contains("Admin - Users");
     }
 
+
     public int getAmountOfUsers() {
         List<WebElement> elements = driver.findElements(
                 By.xpath("//table[@id='userTable']/tbody/tr"));
         return elements.size();
     }
 
-    public int getRowOfUser(String email) {
+    private int getRowOfUser(String email) {
         List<WebElement> elements = driver.findElements(
                 By.xpath("//table[@id='userTable']/tbody/tr"));
         for(int i = 0; i < elements.size(); i++) {
@@ -39,6 +40,19 @@ public class UsersPO extends LayoutPO {
         return -1;
     }
 
+    public void disableUser(String email) {
+        int row = getRowOfUser(email);
+        WebElement element = driver.findElement(By.id("userTable:"+row+":disableBtn"));
+        element.click();
+        getDriver().switchTo().alert().accept();
+        waitForPageToLoad();
+    }
 
-
+    public void enableUser(String email) {
+        int row = getRowOfUser(email);
+        WebElement element = driver.findElement(By.id("userTable:"+row+":enableBtn"));
+        element.click();
+        getDriver().switchTo().alert().accept();
+        waitForPageToLoad();
+    }
 }

@@ -90,11 +90,5 @@ public class HomeController implements Serializable{
         this.book = book;
     }
 
-    public Map<Long, List<String>> getBooksForm() {
-        return booksForm;
-    }
 
-    public void setBooksForm(Map<Long, List<String>> booksForm) {
-        this.booksForm = booksForm;
-    }
 }
